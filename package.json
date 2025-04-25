@@ -1,0 +1,49 @@
+{
+  "name": "comparator.ts",
+  "version": "1.0.0",
+  "description": "A TypeScript library for comparing values",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "dist/index.cjs",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "lint": "pnpm lint:prettier && pnpm lint:eslint",
+    "lint:eslint": "eslint --max-warnings=0 .",
+    "lint:prettier": "prettier --check .",
+    "pretest": "pnpm run build",
+    "test": "tsx --experimental-test-coverage --test-coverage-include=index.ts --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=lcov.info --test test.ts",
+    "posttest": "attw --pack .",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f",
+  "devDependencies": {
+    "@arethetypeswrong/cli": "0.17.4",
+    "@eslint/js": "9.25.1",
+    "@microsoft/api-extractor": "7.52.5",
+    "@tsconfig/recommended": "1.0.8",
+    "@tsconfig/strictest": "2.0.5",
+    "@types/node": "22.15.2",
+    "eslint": "9.25.1",
+    "eslint-config-prettier": "10.1.2",
+    "eslint-plugin-simple-import-sort": "12.1.1",
+    "eslint-plugin-tsdoc": "0.4.0",
+    "husky": "9.1.7",
+    "lint-staged": "15.5.1",
+    "prettier": "3.5.3",
+    "tsup": "8.4.0",
+    "tsx": "4.19.3",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.31.0"
+  }
+}

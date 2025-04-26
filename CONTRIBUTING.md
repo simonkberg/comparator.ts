@@ -7,7 +7,7 @@
 
 It's always a good idea to create an [issue] to discuss your ideas before you start working on them.
 
-> **Note**
+> [!NOTE]
 > This project uses prettier and eslint to enforce code style. You can run `pnpm lint` to check
 > your code for style issues.
 >
@@ -19,7 +19,7 @@ It's always a good idea to create an [issue] to discuss your ideas before you st
 
 Fork the repository on GitHub and clone your fork to your local machine.
 
-> **Note**
+> [!TIP]
 > Use [`gh`] and [configure it][gh-configure] to make this a breeze:
 >
 > ```sh
@@ -32,7 +32,7 @@ dependencies.
 ## Make you code changes
 
 1. Make your code changes and commit them to a new branch.
-   > **Note**
+   > [!NOTE]
    > Make sure your code changes are covered by tests. Run `pnpm test` to run the test suite.
 2. Generate and commit a changelog using `pnpm changeset`.
 3. Push your branch to your fork.

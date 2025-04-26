@@ -1,4 +1,4 @@
-# Contribute to bloom-client-node
+# Contribute to comparator.ts
 
 ## Prerequisites
 

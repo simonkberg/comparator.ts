@@ -26,8 +26,8 @@
     "lint:eslint": "eslint --max-warnings=0 .",
     "lint:prettier": "prettier --check .",
     "prepare": "husky",
-    "prepublish": "pnpm build",
-    "publish": "changeset publish",
+    "prerelease": "pnpm build",
+    "release": "changeset publish",
     "pretest": "pnpm build",
     "test": "tsx --experimental-test-coverage --test-coverage-include=index.ts --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=lcov.info --test test.ts",
     "posttest": "attw --pack ."

@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A TypeScript library for comparing values",
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonkberh/comparator.ts.git"
+  },
   "license": "MIT",
   "author": "Simon Kjellberg <simon.kjellberg@gmail.com>",
   "type": "module",
@@ -22,7 +26,9 @@
     "lint:eslint": "eslint --max-warnings=0 .",
     "lint:prettier": "prettier --check .",
     "prepare": "husky",
-    "pretest": "pnpm run build",
+    "prepublish": "pnpm build",
+    "publish": "changeset publish",
+    "pretest": "pnpm build",
     "test": "tsx --experimental-test-coverage --test-coverage-include=index.ts --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=lcov.info --test test.ts",
     "posttest": "attw --pack ."
   },

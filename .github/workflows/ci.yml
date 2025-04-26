@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [$default-branch]
+    branches: [main]
   pull_request:
-    branches: [$default-branch]
+    branches: [main]
 
 jobs:
   build:
@@ -25,3 +25,4 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
       - run: pnpm lint
+      - run: bash scripts/porcelain.sh

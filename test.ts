@@ -1,6 +1,8 @@
+/// <reference lib="es2023" />
+
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import assert from "node:assert/strict";
-import { describe, it } from "node:test";
+import { describe, it, test } from "node:test";
 
 import {
   booleanComparator,
@@ -173,4 +175,37 @@ describe("nullsLast", () => {
     const cmp = nullsLast(numberComparator);
     assert.deepEqual([3, null, 2].sort(cmp), [2, 3, null]);
   });
+});
+
+test("example", () => {
+  type FeatureConfig = {
+    enabled?: boolean;
+    name: string;
+  };
+
+  const data: FeatureConfig[] = [
+    { enabled: false, name: "Feature A" },
+    { name: "Feature B" },
+    { enabled: true, name: "Feature C" },
+  ];
+
+  const compareByEnabled: Comparator<FeatureConfig> = comparing(
+    (feature) => feature.enabled,
+    nullsLast(booleanComparator.reversed()),
+  );
+
+  const compareByName: Comparator<FeatureConfig> = comparing(
+    (feature) => feature.name,
+    stringComparator,
+  );
+
+  const sortedData = data.toSorted(
+    compareByEnabled.thenComparing(compareByName),
+  );
+
+  assert.deepEqual(sortedData, [
+    { enabled: true, name: "Feature C" },
+    { enabled: false, name: "Feature A" },
+    { name: "Feature B" },
+  ]);
 });

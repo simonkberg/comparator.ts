@@ -3,14 +3,13 @@ const sourceFilesRegex = /\.[cm]?[tj]sx?$/;
 /**
  * Custom lint-staged config.
  *
- * This ensures that all files are formatted with Prettier, and that all source
- * files are linted with ESLint, type-checked with TypeScript, and tested with
- * Jest.
+ * This ensures that all files are formatted, and that all source files are
+ * linted, type-checked, and tested.
  *
  * The order of the commands is important! Eslint must run before Prettier to
  * ensure that any code changes made by ESLint are formatted correctly.
  *
- * @type {import('lint-staged').Configuration}
+ * @type {import("lint-staged").Configuration}
  */
 export default (filenames) => {
   /** @type {string[]} */
@@ -26,7 +25,7 @@ export default (filenames) => {
   }
 
   if (sourceFiles !== "") {
-    commands.push(`eslint --fix ${sourceFiles}`);
+    commands.push(`eslint --max-warnings=0 --fix ${sourceFiles}`);
   }
 
   if (allFiles !== "") {

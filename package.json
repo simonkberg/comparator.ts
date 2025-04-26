@@ -34,7 +34,7 @@
     "prerelease": "pnpm build",
     "release": "changeset publish",
     "pretest": "pnpm build",
-    "test": "tsx --experimental-test-coverage --test-coverage-exclude=test.ts --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=lcov.info --test test.ts",
+    "test": "tsx --test test.ts",
     "posttest": "attw --pack ."
   },
   "devDependencies": {

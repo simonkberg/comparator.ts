@@ -22,9 +22,7 @@
   ],
   "scripts": {
     "build": "pnpm build:ts && pnpm build:docs",
-    "build:docs": "pnpm pnpm build:docs:generate && pnpm build:docs:format",
-    "build:docs:format": "prettier --log-level warn -w docs/api",
-    "build:docs:generate": "typedoc",
+    "build:docs": "typedoc",
     "build:ts": "tsup",
     "lint": "pnpm lint:prettier && pnpm lint:eslint",
     "lint:eslint": "eslint --max-warnings=0 .",

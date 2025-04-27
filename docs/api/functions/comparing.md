@@ -10,7 +10,7 @@
 function comparing<T, U>(mapper, compareFn): Comparator<T>;
 ```
 
-Defined in: [index.ts:90](https://github.com/simonkberg/comparator.ts/blob/806cd3fa4519dbdc4b8bf35e9ef68a7f3c2522aa/index.ts#L90)
+Defined in: [index.ts:90](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L90)
 
 Creates a [Comparator](../interfaces/Comparator.md) that compares objects of type `T` by mapping them to values of type `U`
 using a provided mapping function and then comparing the mapped values using a given comparison function.

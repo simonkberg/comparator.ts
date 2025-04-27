@@ -10,7 +10,7 @@
 type CompareFn<T> = (a, b) => number;
 ```
 
-Defined in: [index.ts:16](https://github.com/simonkberg/comparator.ts/blob/806cd3fa4519dbdc4b8bf35e9ef68a7f3c2522aa/index.ts#L16)
+Defined in: [index.ts:16](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L16)
 
 A function interface for comparing two objects of type `T`.
 

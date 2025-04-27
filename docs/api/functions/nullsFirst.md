@@ -10,7 +10,7 @@
 function nullsFirst<T>(compareFn): Comparator<undefined | null | T>;
 ```
 
-Defined in: [index.ts:194](https://github.com/simonkberg/comparator.ts/blob/806cd3fa4519dbdc4b8bf35e9ef68a7f3c2522aa/index.ts#L194)
+Defined in: [index.ts:194](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L194)
 
 Creates a [Comparator](../interfaces/Comparator.md) that considers `null` or `undefined` values as less than non-null values.
 

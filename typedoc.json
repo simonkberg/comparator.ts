@@ -6,5 +6,7 @@
   "entryFileName": "index",
   "useCodeBlocks": true,
   "indexFormat": "table",
-  "parametersFormat": "table"
+  "parametersFormat": "table",
+  "formatWithPrettier": true,
+  "gitRevision": "main"
 }

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://typedoc-plugin-markdown.org/schema.json",
+  "entryPoints": ["./index.ts"],
+  "out": "docs/api",
+  "plugin": ["typedoc-plugin-markdown"],
+  "entryFileName": "index",
+  "flattenOutputFiles": true,
+  "useCodeBlocks": true,
+  "indexFormat": "table",
+  "parametersFormat": "table",
+  "formatWithPrettier": true,
+  "gitRevision": "main"
+}

@@ -1,8 +1,8 @@
-[**comparator.ts**](../index.md)
+[**comparator.ts**](index.md)
 
 ---
 
-[comparator.ts](../index.md) / dateComparator
+[comparator.ts](index.md) / dateComparator
 
 # Variable: dateComparator
 
@@ -12,7 +12,7 @@ const dateComparator: Comparator<Date>;
 
 Defined in: [index.ts:153](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L153)
 
-A [Comparator](../interfaces/Comparator.md) for comparing `Date` objects in ascending order based on their time values.
+A [Comparator](Interface.Comparator.md) for comparing `Date` objects in ascending order based on their time values.
 
 ## Example
 
@@ -23,4 +23,4 @@ console.log(result); // Outputs a negative number because the first date is earl
 
 ## Returns
 
-A [Comparator](../interfaces/Comparator.md) instance for comparing `Date` objects.
+A [Comparator](Interface.Comparator.md) instance for comparing `Date` objects.

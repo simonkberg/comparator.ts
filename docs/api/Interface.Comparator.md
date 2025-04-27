@@ -1,8 +1,8 @@
-[**comparator.ts**](../index.md)
+[**comparator.ts**](index.md)
 
 ---
 
-[comparator.ts](../index.md) / Comparator
+[comparator.ts](index.md) / Comparator
 
 # Interface: Comparator()\<T\>
 
@@ -12,7 +12,7 @@ An interface for comparing two objects of type `T`.
 
 ## Extends
 
-- [`CompareFn`](../type-aliases/CompareFn.md)\<`T`\>
+- [`CompareFn`](TypeAlias.CompareFn.md)\<`T`\>
 
 ## Type Parameters
 

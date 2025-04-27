@@ -1,8 +1,8 @@
-[**comparator.ts**](../index.md)
+[**comparator.ts**](index.md)
 
 ---
 
-[comparator.ts](../index.md) / stringComparator
+[comparator.ts](index.md) / stringComparator
 
 # Variable: stringComparator
 
@@ -12,7 +12,7 @@ const stringComparator: Comparator<string>;
 
 Defined in: [index.ts:107](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L107)
 
-A [Comparator](../interfaces/Comparator.md) for comparing strings using locale-specific ordering.
+A [Comparator](Interface.Comparator.md) for comparing strings using locale-specific ordering.
 
 ## Example
 
@@ -23,4 +23,4 @@ console.log(result); // Outputs a negative number because "apple" comes before "
 
 ## Returns
 
-A [Comparator](../interfaces/Comparator.md) instance for comparing strings.
+A [Comparator](Interface.Comparator.md) instance for comparing strings.

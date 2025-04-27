@@ -1,8 +1,8 @@
-[**comparator.ts**](../index.md)
+[**comparator.ts**](index.md)
 
 ---
 
-[comparator.ts](../index.md) / numberComparator
+[comparator.ts](index.md) / numberComparator
 
 # Variable: numberComparator
 
@@ -12,7 +12,7 @@ const numberComparator: Comparator<number>;
 
 Defined in: [index.ts:123](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L123)
 
-A [Comparator](../interfaces/Comparator.md) for comparing numbers in ascending order.
+A [Comparator](Interface.Comparator.md) for comparing numbers in ascending order.
 
 ## Example
 
@@ -23,4 +23,4 @@ console.log(result); // Outputs a negative number because 10 is less than 20.
 
 ## Returns
 
-A [Comparator](../interfaces/Comparator.md) instance for comparing numbers.
+A [Comparator](Interface.Comparator.md) instance for comparing numbers.

@@ -1,8 +1,8 @@
-[**comparator.ts**](../index.md)
+[**comparator.ts**](index.md)
 
 ---
 
-[comparator.ts](../index.md) / CompareFn
+[comparator.ts](index.md) / CompareFn
 
 # Type Alias: CompareFn()\<T\>
 

@@ -5,7 +5,7 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simonkberh/comparator.ts.git"
+    "url": "git+https://github.com/simonkberg/comparator.ts.git"
   },
   "license": "MIT",
   "author": "Simon Kjellberg <simon.kjellberg@gmail.com>",
@@ -18,7 +18,8 @@
   },
   "main": "dist/index.cjs",
   "files": [
-    "dist"
+    "dist",
+    "docs/README.md"
   ],
   "scripts": {
     "build": "pnpm build:ts && pnpm build:docs",

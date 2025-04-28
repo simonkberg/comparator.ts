@@ -20,12 +20,12 @@ A TypeScript library for comparing values.
 
 ## Variables
 
-| Variable                                           | Description                                                                                                                               |
-| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| [booleanComparator](Variable.booleanComparator.md) | \* A [Comparator](Interface.Comparator.md) for comparing boolean values in ascending order, where `false` is considered less than `true`. |
-| [dateComparator](Variable.dateComparator.md)       | A [Comparator](Interface.Comparator.md) for comparing `Date` objects in ascending order based on their time values.                       |
-| [numberComparator](Variable.numberComparator.md)   | A [Comparator](Interface.Comparator.md) for comparing numbers in ascending order.                                                         |
-| [stringComparator](Variable.stringComparator.md)   | A [Comparator](Interface.Comparator.md) for comparing strings using locale-specific ordering.                                             |
+| Variable                                           | Description                                                                                                                            |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| [booleanComparator](Variable.booleanComparator.md) | A [Comparator](Interface.Comparator.md) for comparing boolean values in ascending order, where `false` is considered less than `true`. |
+| [dateComparator](Variable.dateComparator.md)       | A [Comparator](Interface.Comparator.md) for comparing `Date` objects in ascending order based on their time values.                    |
+| [numberComparator](Variable.numberComparator.md)   | A [Comparator](Interface.Comparator.md) for comparing numbers in ascending order.                                                      |
+| [stringComparator](Variable.stringComparator.md)   | A [Comparator](Interface.Comparator.md) for comparing strings using locale-specific ordering.                                          |
 
 ## Functions
 

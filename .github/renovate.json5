@@ -7,7 +7,7 @@
     ":automergeMinor",
     ":automergeDigest",
   ],
-  "pinDigest": {
-    "automerge": true,
+  pinDigest: {
+    automerge: true,
   },
 }

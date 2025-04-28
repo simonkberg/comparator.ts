@@ -1,5 +1,11 @@
 # comparator.ts
 
+## 1.0.4
+
+### Patch Changes
+
+- [#25](https://github.com/simonkberg/comparator.ts/pull/25) [`177ec20`](https://github.com/simonkberg/comparator.ts/commit/177ec208d15aa00831421b6e3f670d63ae6fe7e0) Thanks [@simonkberg](https://github.com/simonkberg)! - Minify bundles
+
 ## 1.0.3
 
 ### Patch Changes

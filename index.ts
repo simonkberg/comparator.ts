@@ -173,7 +173,7 @@ export const numberComparator = comparator<number>((a, b) => a - b);
  * @public
  */
 export const booleanComparator = comparator<boolean>((a, b) =>
-  a === b ? 0 : a ? 1 : -1,
+  a === b ? 0 : a ? -1 : 1,
 );
 
 /**

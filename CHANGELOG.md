@@ -1,5 +1,11 @@
 # comparator.ts
 
+## 1.0.3
+
+### Patch Changes
+
+- [#14](https://github.com/simonkberg/comparator.ts/pull/14) [`7a61d66`](https://github.com/simonkberg/comparator.ts/commit/7a61d66412f69b5071736b9003edd6bde5791347) Thanks [@simonkberg](https://github.com/simonkberg)! - Improve documentation and examples
+
 ## 1.0.2
 
 ### Patch Changes

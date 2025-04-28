@@ -2,7 +2,7 @@
   "name": "comparator.ts",
   "version": "1.0.2",
   "description": "A TypeScript library for comparing values",
-  "keywords": [],
+  "homepage": "https://github.com/simonkberg/comparator.ts#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/simonkberg/comparator.ts.git"

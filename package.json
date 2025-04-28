@@ -34,7 +34,8 @@
     "prepare": "husky",
     "prerelease": "pnpm build",
     "release": "changeset publish",
-    "test": "tsc --noEmit && tsup && tsx --test test.ts && attw --pack ."
+    "test": "tsc --noEmit && tsup && tsx --test index.test.ts && attw --pack .",
+    "test:coverage": "tsx --experimental-test-coverage --test-coverage-include=index.ts --test-reporter=lcov --test-reporter-destination=lcov.info --test-reporter=junit --test-reporter-destination=junit.xml --test-reporter=spec --test-reporter-destination=stdout --test index.test.ts"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.17.4",

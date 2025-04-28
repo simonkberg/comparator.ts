@@ -10,10 +10,11 @@
 const booleanComparator: Comparator<boolean>;
 ```
 
-Defined in: [index.ts:175](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L175)
+Defined in:
+[index.ts:175](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L175)
 
-A [Comparator](Interface.Comparator.md) for comparing boolean values in ascending order, where
-`false` is considered less than `true`.
+A [Comparator](Interface.Comparator.md) for comparing boolean values in
+ascending order, where `false` is considered less than `true`.
 
 ## Example
 

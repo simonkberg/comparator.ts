@@ -10,7 +10,7 @@
 const dateComparator: Comparator<Date>;
 ```
 
-Defined in: [index.ts:153](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L153)
+Defined in: [index.ts:173](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L173)
 
 A [Comparator](Interface.Comparator.md) for comparing `Date` objects in ascending order based on their time values.
 

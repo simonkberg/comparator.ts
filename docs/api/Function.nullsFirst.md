@@ -10,7 +10,7 @@
 function nullsFirst<T>(compareFn): Comparator<undefined | null | T>;
 ```
 
-Defined in: [index.ts:194](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L194)
+Defined in: [index.ts:220](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L220)
 
 Creates a [Comparator](Interface.Comparator.md) that considers `null` or `undefined` values as less than non-null values.
 
@@ -32,3 +32,10 @@ Creates a [Comparator](Interface.Comparator.md) that considers `null` or `undefi
 
 A [Comparator](Interface.Comparator.md) that treats `null` or `undefined` values as less than non-null values
 and delegates non-null comparisons to the provided function.
+
+## Example
+
+```ts
+const result = nullsFirst(numberComparator)(null, 10);
+console.log(result); // Outputs a negative number because `null` is considered less than 10.
+```

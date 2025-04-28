@@ -10,15 +10,15 @@
 const booleanComparator: Comparator<boolean>;
 ```
 
-Defined in: [index.ts:137](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L137)
+Defined in: [index.ts:157](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L157)
 
-A [Comparator](Interface.Comparator.md) for comparing boolean values.
+- A [Comparator](Interface.Comparator.md) for comparing boolean values in ascending order, where `false` is considered less than `true`.
 
 ## Example
 
 ```ts
-const result = booleanComparator(true, false);
-console.log(result); // Outputs 1 because `true` is greater than `false`.
+const result = booleanComparator(false, true);
+console.log(result); // Outputs a negative number because `false` is less than `true`.
 ```
 
 ## Returns

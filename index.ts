@@ -42,17 +42,18 @@ export interface Comparator<T> extends CompareFn<T> {
 /**
  * Creates a {@link Comparator} from a custom comparison function.
  *
- * @typeParam T - The type of objects to be compared.
- * @param compareFn - A function that compares two objects of type `T`.
- *                    Should return a negative number if the first object is less than the second,
- *                    zero if they are equal, or a positive number if the first is greater.
- * @returns A {@link Comparator} that uses the provided comparison function.
  * @example
  * ```ts
  * const lengthComparator = comparator<string>((a, b) => a.length - b.length);
  * const result = lengthComparator("apple", "banana");
  * console.log(result); // Outputs a negative number because "apple" is shorter than "banana".
  * ```
+ *
+ * @typeParam T - The type of objects to be compared.
+ * @param compareFn - A function that compares two objects of type `T`.
+ *                    Should return a negative number if the first object is less than the second,
+ *                    zero if they are equal, or a positive number if the first is greater.
+ * @returns A {@link Comparator} that uses the provided comparison function.
  * @public
  */
 export const comparator = <T>(compareFn: CompareFn<T>): Comparator<T> => {
@@ -84,13 +85,6 @@ export const comparator = <T>(compareFn: CompareFn<T>): Comparator<T> => {
  * Creates a {@link Comparator} that compares objects of type `T` by mapping them to values of type `U`
  * using a provided mapping function and then comparing the mapped values using a given comparison function.
  *
- * @typeParam T - The type of objects to be compared.
- * @typeParam U - The type of the mapped values used for comparison.
- * @param mapper - A function that maps an object of type `T` to a value of type `U`.
- * @param compareFn - A function that compares two mapped values of type `U`.
- *                    Should return a negative number if the first value is less than the second,
- *                    zero if they are equal, or a positive number if the first is greater.
- * @returns A {@link Comparator} for comparing objects of type `T` based on their mapped values.
  * @example
  * ```ts
  * type Person = { name: string; age: number };
@@ -103,6 +97,14 @@ export const comparator = <T>(compareFn: CompareFn<T>): Comparator<T> => {
  * const sortedPeople = people.sort(ageComparator);
  * console.log(sortedPeople); // Outputs the array sorted by age in ascending order.
  * ```
+ *
+ * @typeParam T - The type of objects to be compared.
+ * @typeParam U - The type of the mapped values used for comparison.
+ * @param mapper - A function that maps an object of type `T` to a value of type `U`.
+ * @param compareFn - A function that compares two mapped values of type `U`.
+ *                    Should return a negative number if the first value is less than the second,
+ *                    zero if they are equal, or a positive number if the first is greater.
+ * @returns A {@link Comparator} for comparing objects of type `T` based on their mapped values.
  * @public
  */
 export const comparing = <T, U>(
@@ -141,12 +143,12 @@ export const stringComparator = comparator<string>((a, b) =>
 export const numberComparator = comparator<number>((a, b) => a - b);
 
 /**
- * A {@link Comparator} for comparing boolean values.
+ * * A {@link Comparator} for comparing boolean values in ascending order, where `false` is considered less than `true`.
  *
  * @example
  * ```ts
- * const result = booleanComparator(true, false);
- * console.log(result); // Outputs 1 because `true` is greater than `false`.
+ * const result = booleanComparator(false, true);
+ * console.log(result); // Outputs a negative number because `false` is less than `true`.
  * ```
  *
  * @returns A {@link Comparator} instance for comparing boolean values.
@@ -201,17 +203,18 @@ function NullComparator<T>(
 /**
  * Creates a {@link Comparator} that considers `null` or `undefined` values as less than non-null values.
  *
+ * @example
+ * ```ts
+ * const result = nullsFirst(numberComparator)(null, 10);
+ * console.log(result); // Outputs a negative number because `null` is considered less than 10.
+ * ```
+ *
  * @typeParam T - The type of objects to be compared.
  * @param compareFn - A function that compares two non-null values of type `T`.
  *                    Should return a negative number if the first value is less than the second,
  *                    zero if they are equal, or a positive number if the first is greater.
  * @returns A {@link Comparator} that treats `null` or `undefined` values as less than non-null values
  *          and delegates non-null comparisons to the provided function.
- * @example
- * ```ts
- * const result = nullsFirst(numberComparator)(null, 10);
- * console.log(result); // Outputs a negative number because `null` is considered less than 10.
- * ```
  * @public
  */
 export const nullsFirst = <T>(compareFn: CompareFn<T>) =>
@@ -220,17 +223,18 @@ export const nullsFirst = <T>(compareFn: CompareFn<T>) =>
 /**
  * Creates a {@link Comparator} that considers `null` or `undefined` values as greater than non-null values.
  *
+ * @example
+ * ```ts
+ * const result = nullsLast(numberComparator)(10, null);
+ * console.log(result); // Outputs a negative number because 10 is considered less than `null`.
+ * ```
+ *
  * @typeParam T - The type of objects to be compared.
  * @param compareFn - A function that compares two non-null values of type `T`.
  *                    Should return a negative number if the first value is less than the second,
  *                    zero if they are equal, or a positive number if the first is greater.
  * @returns A {@link Comparator} that treats `null` or `undefined` values as greater than non-null values
  *          and delegates non-null comparisons to the provided function.
- * @example
- * ```ts
- * const result = nullsLast(numberComparator)(10, null);
- * console.log(result); // Outputs a negative number because 10 is considered less than `null`.
- * ```
  * @public
  */
 export const nullsLast = <T>(compareFn: CompareFn<T>) =>

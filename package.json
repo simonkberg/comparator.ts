@@ -25,7 +25,7 @@
     "build": "pnpm build:ts && pnpm build:docs",
     "build:docs": "typedoc",
     "build:ts": "tsup",
-    "lint": "pnpm lint:prettier && pnpm lint:eslint",
+    "lint": "pnpm lint:eslint && pnpm lint:prettier",
     "lint:eslint": "eslint --max-warnings=0 .",
     "lint:eslint:fix": "eslint --max-warnings=0 --fix .",
     "lint:fix": "pnpm lint:eslint:fix && pnpm lint:prettier:fix",

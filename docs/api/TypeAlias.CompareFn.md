@@ -10,8 +10,7 @@
 type CompareFn<T> = (a, b) => number;
 ```
 
-Defined in:
-[index.ts:17](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L17)
+Defined in: [index.ts:17](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L17)
 
 A function interface for comparing two objects of type `T`.
 
@@ -32,5 +31,5 @@ A function interface for comparing two objects of type `T`.
 
 `number`
 
-A negative number if `a` is less than `b`, zero if they are equal, or a positive
-number if `a` is greater than `b`.
+A negative number if `a` is less than `b`, zero if they are equal,
+or a positive number if `a` is greater than `b`.

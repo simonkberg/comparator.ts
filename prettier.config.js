@@ -4,7 +4,6 @@
  */
 const config = {
   plugins: ["prettier-plugin-jsdoc"],
-  proseWrap: "always",
   tsdoc: true,
 };
 

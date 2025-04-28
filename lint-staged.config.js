@@ -33,7 +33,7 @@ export default (filenames) => {
   }
 
   if (sourceFiles !== "") {
-    commands.push(`tsx --test test.ts`, `tsc -p tsconfig.json --noEmit`);
+    commands.push(`tsx --test index.test.ts`, `tsc -p tsconfig.json --noEmit`);
   }
 
   return commands;

@@ -59,8 +59,8 @@ const sortedData = data.toSorted(compareByEnabled.thenComparing(compareByName));
 
 ## API
 
-Full API documentation can be found [here](./api/index.md).
+Full API documentation can be found [here](docs/index.md).
 
 ## Contributing
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md) for more information.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.

@@ -2,17 +2,18 @@
 
 ---
 
-[comparator.ts](index.md) / nullsFirst
+[comparator.ts](index.md) / nullsLast
 
-# Function: nullsFirst()
+# Function: nullsLast()
 
 ```ts
-function nullsFirst<T>(compareFn): Comparator<undefined | null | T>;
+function nullsLast<T>(compareFn): Comparator<undefined | null | T>;
 ```
 
-Defined in: [index.ts:194](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L194)
+Defined in: [index.ts:272](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L272)
 
-Creates a [Comparator](Interface.Comparator.md) that considers `null` or `undefined` values as less than non-null values.
+Creates a [Comparator](Interface.Comparator.md) that considers `null` or `undefined` values as
+greater than non-null values.
 
 ## Type Parameters
 
@@ -30,5 +31,13 @@ Creates a [Comparator](Interface.Comparator.md) that considers `null` or `undefi
 
 [`Comparator`](Interface.Comparator.md)\<`undefined` \| `null` \| `T`\>
 
-A [Comparator](Interface.Comparator.md) that treats `null` or `undefined` values as less than non-null values
-and delegates non-null comparisons to the provided function.
+A [Comparator](Interface.Comparator.md) that treats `null` or `undefined` values as
+greater than non-null values and delegates non-null comparisons to the
+provided function.
+
+## Example
+
+```ts
+const result = nullsLast(numberComparator)(10, null);
+console.log(result); // Outputs a negative number because 10 is considered less than `null`.
+```

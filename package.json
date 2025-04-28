@@ -2,7 +2,7 @@
   "name": "comparator.ts",
   "version": "1.0.2",
   "description": "A TypeScript library for comparing values",
-  "keywords": [],
+  "homepage": "https://github.com/simonkberg/comparator.ts#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/simonkberg/comparator.ts.git"
@@ -19,7 +19,7 @@
   "main": "dist/index.cjs",
   "files": [
     "dist",
-    "docs/README.md"
+    "README.md"
   ],
   "scripts": {
     "build": "pnpm build:ts && pnpm build:docs",
@@ -50,6 +50,7 @@
     "husky": "9.1.7",
     "lint-staged": "15.5.1",
     "prettier": "3.5.3",
+    "prettier-plugin-jsdoc": "1.3.2",
     "tsup": "8.4.0",
     "tsx": "4.19.3",
     "typedoc": "0.28.3",

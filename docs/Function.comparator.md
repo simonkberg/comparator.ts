@@ -10,7 +10,7 @@
 function comparator<T>(compareFn): Comparator<T>;
 ```
 
-Defined in: [index.ts:52](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L52)
+Defined in: [index.ts:66](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L66)
 
 Creates a [Comparator](Interface.Comparator.md) from a custom comparison function.
 
@@ -31,3 +31,11 @@ Creates a [Comparator](Interface.Comparator.md) from a custom comparison functio
 [`Comparator`](Interface.Comparator.md)\<`T`\>
 
 A [Comparator](Interface.Comparator.md) that uses the provided comparison function.
+
+## Example
+
+```ts
+const lengthComparator = comparator<string>((a, b) => a.length - b.length);
+const result = lengthComparator("apple", "banana");
+console.log(result); // Outputs a negative number because "apple" is shorter than "banana".
+```

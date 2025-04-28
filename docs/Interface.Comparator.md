@@ -6,7 +6,7 @@
 
 # Interface: Comparator()\<T\>
 
-Defined in: [index.ts:24](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L24)
+Defined in: [index.ts:25](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L25)
 
 An interface for comparing two objects of type `T`.
 
@@ -24,7 +24,7 @@ An interface for comparing two objects of type `T`.
 Comparator(a, b): number;
 ```
 
-Defined in: [index.ts:16](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L16)
+Defined in: [index.ts:17](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L17)
 
 An interface for comparing two objects of type `T`.
 
@@ -47,7 +47,7 @@ An interface for comparing two objects of type `T`.
 reversed(): Comparator<T>;
 ```
 
-Defined in: [index.ts:39](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L39)
+Defined in: [index.ts:43](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L43)
 
 Creates a comparator that reverses the order of this comparator.
 
@@ -55,7 +55,8 @@ Creates a comparator that reverses the order of this comparator.
 
 `Comparator`\<`T`\>
 
-A new Comparator that reverses the order of this comparator.
+A new Comparator that reverses the order of this
+comparator.
 
 ---
 
@@ -65,10 +66,10 @@ A new Comparator that reverses the order of this comparator.
 thenComparing(other): Comparator<T>;
 ```
 
-Defined in: [index.ts:32](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L32)
+Defined in: [index.ts:35](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L35)
 
-Creates a compound comparator that first uses this comparator and then uses another comparator
-if the first comparison results in equality.
+Creates a compound comparator that first uses this comparator and then uses
+another comparator if the first comparison results in equality.
 
 #### Parameters
 
@@ -80,4 +81,5 @@ if the first comparison results in equality.
 
 `Comparator`\<`T`\>
 
-A new Comparator that combines this comparator and the provided comparator.
+A new Comparator that combines this comparator and the
+provided comparator.

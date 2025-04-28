@@ -1,7 +1,8 @@
 {
   "$schema": "https://typedoc-plugin-markdown.org/schema.json",
   "entryPoints": ["./index.ts"],
-  "out": "docs/api",
+  "out": "docs",
+  "readme": "none",
   "plugin": ["typedoc-plugin-markdown"],
   "entryFileName": "index",
   "flattenOutputFiles": true,
@@ -9,5 +10,6 @@
   "indexFormat": "table",
   "parametersFormat": "table",
   "formatWithPrettier": true,
+  "prettierConfigFile": "./prettier.config.js",
   "gitRevision": "main"
 }

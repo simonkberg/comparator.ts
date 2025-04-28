@@ -25,15 +25,16 @@
     "build": "pnpm build:ts && pnpm build:docs",
     "build:docs": "typedoc",
     "build:ts": "tsup",
-    "lint": "pnpm lint:prettier && pnpm lint:eslint",
+    "lint": "pnpm lint:eslint && pnpm lint:prettier",
     "lint:eslint": "eslint --max-warnings=0 .",
+    "lint:eslint:fix": "eslint --max-warnings=0 --fix .",
+    "lint:fix": "pnpm lint:eslint:fix && pnpm lint:prettier:fix",
     "lint:prettier": "prettier --check .",
+    "lint:prettier:fix": "prettier --write .",
     "prepare": "husky",
     "prerelease": "pnpm build",
     "release": "changeset publish",
-    "pretest": "pnpm build",
-    "test": "tsx --test test.ts",
-    "posttest": "attw --pack ."
+    "test": "tsc --noEmit && tsup && tsx --test test.ts && attw --pack ."
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.17.4",

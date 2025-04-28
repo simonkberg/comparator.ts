@@ -47,6 +47,12 @@ export interface Comparator<T> extends CompareFn<T> {
  *                    Should return a negative number if the first object is less than the second,
  *                    zero if they are equal, or a positive number if the first is greater.
  * @returns A {@link Comparator} that uses the provided comparison function.
+ * @example
+ * ```ts
+ * const lengthComparator = comparator<string>((a, b) => a.length - b.length);
+ * const result = lengthComparator("apple", "banana");
+ * console.log(result); // Outputs a negative number because "apple" is shorter than "banana".
+ * ```
  * @public
  */
 export const comparator = <T>(compareFn: CompareFn<T>): Comparator<T> => {
@@ -85,6 +91,18 @@ export const comparator = <T>(compareFn: CompareFn<T>): Comparator<T> => {
  *                    Should return a negative number if the first value is less than the second,
  *                    zero if they are equal, or a positive number if the first is greater.
  * @returns A {@link Comparator} for comparing objects of type `T` based on their mapped values.
+ * @example
+ * ```ts
+ * type Person = { name: string; age: number };
+ * const people: Person[] = [
+ *   { name: "Alice", age: 30 },
+ *   { name: "Bob", age: 25 },
+ *   { name: "Charlie", age: 35 },
+ * ];
+ * const ageComparator = comparing<Person, number>((person) => person.age, numberComparator);
+ * const sortedPeople = people.sort(ageComparator);
+ * console.log(sortedPeople); // Outputs the array sorted by age in ascending order.
+ * ```
  * @public
  */
 export const comparing = <T, U>(
@@ -189,6 +207,11 @@ function NullComparator<T>(
  *                    zero if they are equal, or a positive number if the first is greater.
  * @returns A {@link Comparator} that treats `null` or `undefined` values as less than non-null values
  *          and delegates non-null comparisons to the provided function.
+ * @example
+ * ```ts
+ * const result = nullsFirst(numberComparator)(null, 10);
+ * console.log(result); // Outputs a negative number because `null` is considered less than 10.
+ * ```
  * @public
  */
 export const nullsFirst = <T>(compareFn: CompareFn<T>) =>
@@ -203,6 +226,11 @@ export const nullsFirst = <T>(compareFn: CompareFn<T>) =>
  *                    zero if they are equal, or a positive number if the first is greater.
  * @returns A {@link Comparator} that treats `null` or `undefined` values as greater than non-null values
  *          and delegates non-null comparisons to the provided function.
+ * @example
+ * ```ts
+ * const result = nullsLast(numberComparator)(10, null);
+ * console.log(result); // Outputs a negative number because 10 is considered less than `null`.
+ * ```
  * @public
  */
 export const nullsLast = <T>(compareFn: CompareFn<T>) =>

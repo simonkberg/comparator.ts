@@ -1,13 +1,8 @@
-import { fileURLToPath, URL } from "node:url";
-
 import js from "@eslint/js";
 import prettier from "eslint-config-prettier";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import tsdoc from "eslint-plugin-tsdoc";
 import ts from "typescript-eslint";
-
-// import.meta.dirname is only available in Node v20+
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default ts.config([
   { ignores: ["dist/*"] },
@@ -17,7 +12,7 @@ export default ts.config([
     languageOptions: {
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: __dirname,
+        tsconfigRootDir: import.meta.dirname,
       },
     },
   },

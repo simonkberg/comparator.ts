@@ -4,6 +4,7 @@
     "config:js-lib",
     "helpers:pinGitHubActionDigests",
     ":configMigration",
+    ":maintainLockFilesWeekly",
     ":automergeMinor",
     ":automergeDigest",
   ],

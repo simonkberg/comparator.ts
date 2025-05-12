@@ -10,4 +10,5 @@
   pinDigest: {
     automerge: true,
   },
+  postUpdateOptions: ["pnpmDedupe"],
 }

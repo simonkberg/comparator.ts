@@ -38,7 +38,7 @@
     "test:coverage": "tsx --experimental-test-coverage --test-coverage-include=index.ts --test-reporter=lcov --test-reporter-destination=lcov.info --test-reporter=junit --test-reporter-destination=junit.xml --test-reporter=spec --test-reporter-destination=stdout --test index.test.ts"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.18.1",
+    "@arethetypeswrong/cli": "0.18.2",
     "@changesets/changelog-github": "0.5.1",
     "@changesets/cli": "2.29.4",
     "@eslint/js": "9.28.0",

@@ -57,7 +57,7 @@
     "tsx": "4.20.3",
     "typedoc": "0.28.8",
     "typedoc-plugin-markdown": "4.8.0",
-    "typescript": "5.8.3",
+    "typescript": "5.9.2",
     "typescript-eslint": "8.38.0"
   },
   "packageManager": "pnpm@10.14.0"

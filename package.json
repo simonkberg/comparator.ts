@@ -58,7 +58,7 @@
     "typedoc": "0.28.9",
     "typedoc-plugin-markdown": "4.8.0",
     "typescript": "5.9.2",
-    "typescript-eslint": "8.39.0"
+    "typescript-eslint": "8.39.1"
   },
   "packageManager": "pnpm@10.14.0"
 }

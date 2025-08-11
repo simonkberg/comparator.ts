@@ -90,8 +90,8 @@ packages:
     resolution: {integrity: sha512-KHp2IflsnGywDjBWDkR9iEqiWSpc8GIi0lgTT3mOElT0PP1tG26P4tmFI2YvAdzgq9RGyoHZQEIEdZy6Ec5xCA==}
     engines: {node: '>=6.9.0'}
 
-  '@braidai/lang@1.1.1':
-    resolution: {integrity: sha512-5uM+no3i3DafVgkoW7ayPhEGHNNBZCSj5TrGDQt0ayEKQda5f3lAXlmQg0MR5E0gKgmTzUUEtSWHsEC3h9jUcg==}
+  '@braidai/lang@1.1.2':
+    resolution: {integrity: sha512-qBcknbBufNHlui137Hft8xauQMTZDKdophmLFv05r2eNmdIv/MlPuP4TdUknHG68UdWLgVZwgxVe735HzJNIwA==}
 
   '@changesets/apply-release-plan@7.0.12':
     resolution: {integrity: sha512-EaET7As5CeuhTzvXTQCRZeBUcisoYPDDcXvgTE/2jmmypKp0RC7LxKj/yzqeh/1qFTZI7oDGFcL1PHRuQuketQ==}
@@ -1912,7 +1912,7 @@ snapshots:
 
   '@babel/runtime@7.28.2': {}
 
-  '@braidai/lang@1.1.1': {}
+  '@braidai/lang@1.1.2': {}
 
   '@changesets/apply-release-plan@7.0.12':
     dependencies:
@@ -2242,7 +2242,7 @@ snapshots:
 
   '@loaderkit/resolve@1.0.4':
     dependencies:
-      '@braidai/lang': 1.1.1
+      '@braidai/lang': 1.1.2
 
   '@manypkg/find-root@1.1.0':
     dependencies:

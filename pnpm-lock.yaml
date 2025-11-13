@@ -24,8 +24,8 @@ importers:
         specifier: 1.0.13
         version: 1.0.13
       '@tsconfig/strictest':
-        specifier: 2.0.7
-        version: 2.0.7
+        specifier: 2.0.8
+        version: 2.0.8
       '@types/node':
         specifier: 22.19.1
         version: 22.19.1
@@ -716,8 +716,8 @@ packages:
   '@tsconfig/recommended@1.0.13':
     resolution: {integrity: sha512-sySRuBfMKyKO/j2ZAhR8kSembhjuPEV4Ra3AHtmWLq51+iGaudr45crPSzNC5b7/Ctrh9dfUpBuTlYrH6rM58Q==}
 
-  '@tsconfig/strictest@2.0.7':
-    resolution: {integrity: sha512-lG1bXQloBVvQXasPBZSBaWbs7GNW4txZMYs7XMUVzM0s4seCbJACYBPFIRpGNVD3gC8gndK00AZON1uBrJt4Fw==}
+  '@tsconfig/strictest@2.0.8':
+    resolution: {integrity: sha512-XnQ7vNz5HRN0r88GYf1J9JJjqtZPiHt2woGJOo2dYqyHGGcd6OLGqSlBB6p1j9mpzja6Oe5BoPqWmeDx6X9rLw==}
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -2609,7 +2609,7 @@ snapshots:
 
   '@tsconfig/recommended@1.0.13': {}
 
-  '@tsconfig/strictest@2.0.7': {}
+  '@tsconfig/strictest@2.0.8': {}
 
   '@types/debug@4.1.12':
     dependencies:

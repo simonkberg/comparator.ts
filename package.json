@@ -52,7 +52,7 @@
     "husky": "9.1.7",
     "lint-staged": "16.2.7",
     "prettier": "3.7.1",
-    "prettier-plugin-jsdoc": "1.5.0",
+    "prettier-plugin-jsdoc": "1.7.0",
     "tsup": "8.5.1",
     "tsx": "4.20.6",
     "typedoc": "0.28.14",

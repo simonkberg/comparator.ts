@@ -51,8 +51,8 @@ importers:
         specifier: 3.7.4
         version: 3.7.4
       prettier-plugin-jsdoc:
-        specifier: 1.7.1
-        version: 1.7.1(prettier@3.7.4)
+        specifier: 1.8.0
+        version: 1.8.0(prettier@3.7.4)
       tsup:
         specifier: 8.5.1
         version: 8.5.1(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2)
@@ -1523,8 +1523,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier-plugin-jsdoc@1.7.1:
-    resolution: {integrity: sha512-OQxms+Uw/Cau9LJF0HRti16xBQDYsrQhXzThPPMk7fI6D4ecObzQqfjmNU6cmBfvIjBW60BKJP23j9P4hd+N/Q==}
+  prettier-plugin-jsdoc@1.8.0:
+    resolution: {integrity: sha512-byW8EBZ1DSA3CPdDGBXfcdqqhh2eq0+HlIOPTGZ6rf9O2p/AwBmtS0e49ot5ZeOdcszj81FyzbyHr/VS0eYpCg==}
     engines: {node: '>=14.13.1 || >=16.0.0'}
     peerDependencies:
       prettier: ^3.0.0
@@ -3407,7 +3407,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-jsdoc@1.7.1(prettier@3.7.4):
+  prettier-plugin-jsdoc@1.8.0(prettier@3.7.4):
     dependencies:
       binary-searching: 2.0.5
       comment-parser: 1.4.1

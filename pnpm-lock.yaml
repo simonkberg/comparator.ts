@@ -39,8 +39,8 @@ importers:
         specifier: 12.1.1
         version: 12.1.1(eslint@9.39.3)
       eslint-plugin-tsdoc:
-        specifier: 0.5.1
-        version: 0.5.1(eslint@9.39.3)(typescript@5.9.3)
+        specifier: 0.5.2
+        version: 0.5.2(eslint@9.39.3)(typescript@5.9.3)
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -932,8 +932,8 @@ packages:
     peerDependencies:
       eslint: '>=5.0.0'
 
-  eslint-plugin-tsdoc@0.5.1:
-    resolution: {integrity: sha512-+EFu9XAFzogfoRspo2slmHZZ10amXqLAhmgCG0nbR6RZHNZK2XmsE7gfZ8gBjaO/p6C2DOGn09UpTGOlYy6OdQ==}
+  eslint-plugin-tsdoc@0.5.2:
+    resolution: {integrity: sha512-BlvqjWZdBJDIPO/YU3zcPCF23CvjYT3gyu63yo6b609NNV3D1b6zceAREy2xnweuBoDpZcLNuPyAUq9cvx6bbQ==}
 
   eslint-scope@8.4.0:
     resolution: {integrity: sha512-sNXOfKCn74rt8RICKMvJS7XKV/Xk9kA7DyJr8mJik3S7Cwgy3qlkkmyS2uQB3jiJg6VNdZd/pDBJu0nvG2NlTg==}
@@ -2719,7 +2719,7 @@ snapshots:
     dependencies:
       eslint: 9.39.3
 
-  eslint-plugin-tsdoc@0.5.1(eslint@9.39.3)(typescript@5.9.3):
+  eslint-plugin-tsdoc@0.5.2(eslint@9.39.3)(typescript@5.9.3):
     dependencies:
       '@microsoft/tsdoc': 0.16.0
       '@microsoft/tsdoc-config': 0.18.1

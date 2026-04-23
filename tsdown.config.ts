@@ -11,4 +11,6 @@ export default defineConfig((options) => ({
     format === "es"
       ? { js: ".js", dts: ".d.ts" }
       : { js: ".cjs", dts: ".d.cts" },
+  attw: { level: "error" },
+  publint: true,
 }));

@@ -9,7 +9,7 @@ importers:
   .:
     devDependencies:
       '@arethetypeswrong/core':
-        specifier: ^0.18.2
+        specifier: 0.18.2
         version: 0.18.2
       '@changesets/changelog-github':
         specifier: 0.6.0
@@ -54,10 +54,10 @@ importers:
         specifier: 1.8.0
         version: 1.8.0(prettier@3.8.3)
       publint:
-        specifier: ^0.3.18
+        specifier: 0.3.18
         version: 0.3.18
       tsdown:
-        specifier: ^0.21.9
+        specifier: 0.21.9
         version: 0.21.9(@arethetypeswrong/core@0.18.2)(publint@0.3.18)(typescript@6.0.3)
       tsx:
         specifier: 4.21.0

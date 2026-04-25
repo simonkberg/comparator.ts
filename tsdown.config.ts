@@ -7,10 +7,6 @@ export default defineConfig((options) => ({
   dts: true,
   minify: !options.watch,
   sourcemap: !options.watch,
-  outExtensions: ({ format }) =>
-    format === "es"
-      ? { js: ".js", dts: ".d.ts" }
-      : { js: ".cjs", dts: ".d.cts" },
   attw: { level: "error" },
   publint: true,
 }));

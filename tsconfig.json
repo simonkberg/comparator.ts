@@ -6,7 +6,6 @@
   ],
   "compilerOptions": {
     "incremental": true,
-    "ignoreDeprecations": "6.0",
     "lib": ["dom"],
     "types": ["node"],
     "module": "esnext",

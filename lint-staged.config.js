@@ -33,10 +33,7 @@ export default (filenames) => {
   }
 
   if (sourceFiles !== "") {
-    commands.push(
-      `node --experimental-transform-types --test index.test.ts`,
-      `tsc -p tsconfig.json --noEmit`,
-    );
+    commands.push(`node run-tests.js`, `tsc -p tsconfig.json --noEmit`);
   }
 
   return commands;

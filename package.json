@@ -37,8 +37,8 @@
     "prepare": "husky",
     "prerelease": "pnpm build",
     "release": "changeset publish",
-    "test": "tsc --noEmit && tsdown && node --experimental-transform-types --test index.test.ts",
-    "test:coverage": "node --experimental-transform-types --experimental-test-coverage --test-coverage-include=index.ts --test-reporter=lcov --test-reporter-destination=lcov.info --test-reporter=junit --test-reporter-destination=junit.xml --test-reporter=spec --test-reporter-destination=stdout --test index.test.ts"
+    "test": "tsc --noEmit && tsdown && node run-tests.js",
+    "test:coverage": "node run-tests.js --coverage"
   },
   "devDependencies": {
     "@arethetypeswrong/core": "0.18.2",

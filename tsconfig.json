@@ -10,7 +10,7 @@
     "types": ["node"],
     "module": "esnext",
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
     "noEmit": true,
     "rootDir": ".",
     "tsBuildInfoFile": ".tsbuildinfo"

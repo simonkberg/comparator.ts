@@ -37,8 +37,8 @@
     "prepare": "husky",
     "prerelease": "pnpm build",
     "release": "changeset publish",
-    "test": "tsc --noEmit && tsdown && tsx --test index.test.ts",
-    "test:coverage": "tsx --experimental-test-coverage --test-coverage-include=index.ts --test-reporter=lcov --test-reporter-destination=lcov.info --test-reporter=junit --test-reporter-destination=junit.xml --test-reporter=spec --test-reporter-destination=stdout --test index.test.ts"
+    "test": "tsc --noEmit && tsdown && node --experimental-transform-types --test index.test.ts",
+    "test:coverage": "node --experimental-transform-types --experimental-test-coverage --test-coverage-include=index.ts --test-reporter=lcov --test-reporter-destination=lcov.info --test-reporter=junit --test-reporter-destination=junit.xml --test-reporter=spec --test-reporter-destination=stdout --test index.test.ts"
   },
   "devDependencies": {
     "@arethetypeswrong/core": "0.18.2",
@@ -59,7 +59,6 @@
     "prettier-plugin-jsdoc": "1.8.0",
     "publint": "0.3.20",
     "tsdown": "0.22.0",
-    "tsx": "4.21.0",
     "typedoc": "0.28.19",
     "typedoc-plugin-markdown": "4.11.0",
     "typescript": "6.0.3",

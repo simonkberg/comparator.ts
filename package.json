@@ -21,6 +21,9 @@
     "dist",
     "README.md"
   ],
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "pnpm build:ts && pnpm build:docs",
     "build:docs": "typedoc",

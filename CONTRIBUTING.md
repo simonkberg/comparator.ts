@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- [Node.js] (v20 or higher)
+- [Node.js] (v22 or higher)
 - [pnpm] (corepack)
 
 It's always a good idea to create an [issue] to discuss your ideas before you start working on them.

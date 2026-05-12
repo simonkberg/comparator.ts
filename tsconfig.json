@@ -2,14 +2,16 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": [
     "@tsconfig/recommended/tsconfig.json",
-    "@tsconfig/strictest/tsconfig.json"
+    "@tsconfig/strictest/tsconfig.json",
+    "@tsconfig/node22/tsconfig.json"
   ],
   "compilerOptions": {
     "incremental": true,
-    "lib": ["dom"],
     "types": ["node"],
     "module": "esnext",
     "moduleResolution": "bundler",
+    "rewriteRelativeImportExtensions": true,
+    "noEmit": true,
     "rootDir": ".",
     "tsBuildInfoFile": ".tsbuildinfo"
   },

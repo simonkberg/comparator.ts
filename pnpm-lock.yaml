@@ -20,6 +20,9 @@ importers:
       '@eslint/js':
         specifier: 10.0.1
         version: 10.0.1(eslint@10.3.0)
+      '@tsconfig/node22':
+        specifier: 22.0.5
+        version: 22.0.5
       '@tsconfig/recommended':
         specifier: 1.0.13
         version: 1.0.13
@@ -59,9 +62,6 @@ importers:
       tsdown:
         specifier: 0.22.0
         version: 0.22.0(@arethetypeswrong/core@0.18.2)(publint@0.3.20)(tsx@4.21.0)(typescript@6.0.3)(unrun@0.2.37)
-      tsx:
-        specifier: 4.21.0
-        version: 4.21.0
       typedoc:
         specifier: 0.28.19
         version: 0.28.19(typescript@6.0.3)
@@ -678,6 +678,9 @@ packages:
 
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
+
+  '@tsconfig/node22@22.0.5':
+    resolution: {integrity: sha512-hLf2ld+sYN/BtOJjHUWOk568dvjFQkHnLNa6zce25GIH+vxKfvTgm3qpaH6ToF5tu/NN0IH66s+Bb5wElHrLcw==}
 
   '@tsconfig/recommended@1.0.13':
     resolution: {integrity: sha512-sySRuBfMKyKO/j2ZAhR8kSembhjuPEV4Ra3AHtmWLq51+iGaudr45crPSzNC5b7/Ctrh9dfUpBuTlYrH6rM58Q==}
@@ -2402,6 +2405,8 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.2': {}
 
+  '@tsconfig/node22@22.0.5': {}
+
   '@tsconfig/recommended@1.0.13': {}
 
   '@tsconfig/strictest@2.0.8': {}
@@ -2751,6 +2756,7 @@ snapshots:
       '@esbuild/win32-arm64': 0.27.7
       '@esbuild/win32-ia32': 0.27.7
       '@esbuild/win32-x64': 0.27.7
+    optional: true
 
   escape-string-regexp@4.0.0: {}
 
@@ -2919,6 +2925,7 @@ snapshots:
   get-tsconfig@4.14.0:
     dependencies:
       resolve-pkg-maps: 1.0.0
+    optional: true
 
   get-tsconfig@5.0.0-beta.5:
     dependencies:
@@ -3563,6 +3570,7 @@ snapshots:
       get-tsconfig: 4.14.0
     optionalDependencies:
       fsevents: 2.3.3
+    optional: true
 
   type-check@0.4.0:
     dependencies:

@@ -14,7 +14,7 @@ import {
   nullsLast,
   numberComparator,
   stringComparator,
-} from "./index";
+} from "./index.ts";
 
 describe("comparator", () => {
   it("should create a comparator from a function", () => {

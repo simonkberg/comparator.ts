@@ -7,7 +7,6 @@
   ],
   "compilerOptions": {
     "incremental": true,
-    "lib": ["dom"],
     "types": ["node"],
     "module": "esnext",
     "moduleResolution": "bundler",

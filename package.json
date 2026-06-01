@@ -41,7 +41,7 @@
     "test:coverage": "node run-tests.js --coverage"
   },
   "devDependencies": {
-    "@arethetypeswrong/core": "0.18.2",
+    "@arethetypeswrong/core": "0.18.3",
     "@changesets/changelog-github": "0.7.0",
     "@changesets/cli": "2.31.0",
     "@eslint/js": "10.0.1",

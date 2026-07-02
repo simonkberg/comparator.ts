@@ -51,11 +51,11 @@ importers:
         specifier: 17.0.8
         version: 17.0.8
       prettier:
-        specifier: 3.9.1
-        version: 3.9.1
+        specifier: 3.9.3
+        version: 3.9.3
       prettier-plugin-jsdoc:
         specifier: 1.8.1
-        version: 1.8.1(prettier@3.9.1)
+        version: 1.8.1(prettier@3.9.3)
       publint:
         specifier: 0.3.21
         version: 0.3.21
@@ -1249,8 +1249,8 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
-  prettier@3.9.1:
-    resolution: {integrity: sha512-ppiDo2CSwexck1eyZUwJHg/N3nf1+6IRCv7W/VJ5vaLnVCmB7+3CdRfMwoCHBBX6xTrREDTksZ4OZl5SSf4zXA==}
+  prettier@3.9.3:
+    resolution: {integrity: sha512-HWmu+K+zvHNpaMfSnYeqdqrDbR16cuIXaPx8WoHaviQkDJh1/0BNtOZmHVQI5jc3wXv0H1yXc9wjvFdXh+n3hQ==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -2863,18 +2863,18 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-jsdoc@1.8.1(prettier@3.9.1):
+  prettier-plugin-jsdoc@1.8.1(prettier@3.9.3):
     dependencies:
       binary-searching: 2.0.5
       comment-parser: 1.4.7
       mdast-util-from-markdown: 2.0.3
-      prettier: 3.9.1
+      prettier: 3.9.3
     transitivePeerDependencies:
       - supports-color
 
   prettier@2.8.8: {}
 
-  prettier@3.9.1: {}
+  prettier@3.9.3: {}
 
   publint@0.3.21:
     dependencies:

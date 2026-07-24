@@ -1,5 +1,11 @@
 # comparator.ts
 
+## 2.0.0
+
+### Major Changes
+
+- [#396](https://github.com/simonkberg/comparator.ts/pull/396) [`93ccd23`](https://github.com/simonkberg/comparator.ts/commit/93ccd23a0d5cf3f5cc92c4306f1747c36ae2494c) Thanks [@simonkberg](https://github.com/simonkberg)! - Drop support for Node.js 20 (EOL). Minimum supported version is now Node.js 22.
+
 ## 1.0.4
 
 ### Patch Changes

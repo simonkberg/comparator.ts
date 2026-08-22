@@ -57,7 +57,7 @@
     "lint-staged": "17.3.0",
     "prettier": "3.9.6",
     "prettier-plugin-jsdoc": "1.8.1",
-    "publint": "0.3.23",
+    "publint": "0.3.24",
     "tsdown": "0.22.14",
     "typedoc": "0.28.20",
     "typedoc-plugin-markdown": "4.12.0",

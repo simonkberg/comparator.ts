@@ -28,6 +28,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
       - run: pnpm lint
+      # Regenerates dist and docs so that the porcelain check below catches
+      # generated output that was not committed alongside the source change.
+      - run: pnpm build
       - run: bash scripts/porcelain.sh
 
   coverage:

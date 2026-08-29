@@ -1,19 +1,20 @@
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
+import { defineConfig } from "oxlint";
+
+export default defineConfig({
   // Default plugins (`typescript`, `unicorn`, `oxc`) and the default
   // `correctness` category, plus type-aware linting via `oxlint-tsgolint`.
-  "categories": {
-    "correctness": "error"
+  categories: {
+    correctness: "error",
   },
-  "options": {
-    "maxWarnings": 0,
-    "typeAware": true
+  options: {
+    maxWarnings: 0,
+    typeAware: true,
   },
   // These rules were enabled by `eslint:recommended` and
   // `typescript-eslint:recommended-type-checked`, but oxlint classifies them as
   // `suspicious`, `pedantic` or `restriction` rather than `correctness`. They
   // are listed explicitly so that dropping ESLint does not lose any of them.
-  "rules": {
+  rules: {
     "eslint/no-array-constructor": "error",
     "eslint/no-case-declarations": "error",
     "eslint/no-empty": "error",
@@ -41,6 +42,6 @@
     "typescript/only-throw-error": "error",
     "typescript/prefer-promise-reject-errors": "error",
     "typescript/require-await": "error",
-    "typescript/restrict-plus-operands": "error"
-  }
-}
+    "typescript/restrict-plus-operands": "error",
+  },
+});

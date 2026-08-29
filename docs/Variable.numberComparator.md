@@ -10,7 +10,7 @@
 const numberComparator: Comparator<number>;
 ```
 
-Defined in: [index.ts:155](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L155)
+Defined in: [index.ts:153](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L153)
 
 A [Comparator](Interface.Comparator.md) for comparing numbers in ascending order.
 

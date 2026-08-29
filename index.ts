@@ -64,23 +64,21 @@ export interface Comparator<T> extends CompareFn<T> {
  * @public
  */
 export const comparator = <T>(compareFn: CompareFn<T>): Comparator<T> => {
-  function Comparator(a: T, b: T) {
+  function Comparator(a: T, b: T): number {
     return compareFn(a, b);
   }
 
-  Comparator.thenComparing = function CompoundComparator(other: Comparator<T>) {
+  Comparator.thenComparing = function CompoundComparator(other: Comparator<T>): Comparator<T> {
     return comparator<T>((a, b) => {
       const result = Comparator(a, b);
-      return result !== 0 ? result : other(a, b);
+      return result === 0 ? other(a, b) : result;
     });
   };
 
   let reversed: Comparator<T> | null = null;
 
-  Comparator.reversed = function ReverseComparator() {
-    if (reversed === null) {
-      reversed = comparator<T>((a, b) => Comparator(b, a));
-    }
+  Comparator.reversed = function ReverseComparator(): Comparator<T> {
+    reversed ??= comparator<T>((a, b) => Comparator(b, a));
 
     return reversed;
   };
@@ -238,7 +236,8 @@ function NullComparator<T>(
  *   function.
  * @public
  */
-export const nullsFirst = <T>(compareFn: CompareFn<T>) => NullComparator(true, compareFn);
+export const nullsFirst = <T>(compareFn: CompareFn<T>): Comparator<T | null | undefined> =>
+  NullComparator(true, compareFn);
 
 /**
  * Creates a {@link Comparator} that considers `null` or `undefined` values as
@@ -260,4 +259,5 @@ export const nullsFirst = <T>(compareFn: CompareFn<T>) => NullComparator(true, c
  *   provided function.
  * @public
  */
-export const nullsLast = <T>(compareFn: CompareFn<T>) => NullComparator(false, compareFn);
+export const nullsLast = <T>(compareFn: CompareFn<T>): Comparator<T | null | undefined> =>
+  NullComparator(false, compareFn);

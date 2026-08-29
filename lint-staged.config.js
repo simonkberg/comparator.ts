@@ -1,4 +1,4 @@
-const sourceFilesRegex = /\.[cm]?[tj]sx?$/;
+const sourceFilesRegex = /\.[cm]?[tj]sx?$/u;
 
 /**
  * Custom lint-staged config.
@@ -11,7 +11,7 @@ const sourceFilesRegex = /\.[cm]?[tj]sx?$/;
  *
  * @type {import("lint-staged").Configuration}
  */
-export default (filenames) => {
+const lintStagedConfig = (filenames) => {
   /** @type {string[]} */
   const commands = [];
   let allFiles = "";
@@ -38,3 +38,5 @@ export default (filenames) => {
 
   return commands;
 };
+
+export default lintStagedConfig;

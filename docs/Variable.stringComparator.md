@@ -10,7 +10,7 @@
 const stringComparator: Comparator<string>;
 ```
 
-Defined in: [index.ts:140](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L140)
+Defined in: [index.ts:138](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L138)
 
 A [Comparator](Interface.Comparator.md) for comparing strings using locale-specific ordering.
 

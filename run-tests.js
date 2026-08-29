@@ -18,7 +18,7 @@ if (major < 26) {
 
 flags.push("--test");
 
-if (values.coverage) {
+if (values.coverage === true) {
   flags.push(
     "--experimental-test-coverage",
     "--test-coverage-include=index.ts",
@@ -35,4 +35,4 @@ const { status } = spawnSync(process.execPath, [...flags, "index.test.ts"], {
   stdio: "inherit",
 });
 
-process.exit(status ?? 1);
+process.exitCode = status ?? 1;

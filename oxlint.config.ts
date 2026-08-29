@@ -1,47 +1,40 @@
 import { defineConfig } from "oxlint";
 
 export default defineConfig({
-  // Default plugins (`typescript`, `unicorn`, `oxc`) and the default
-  // `correctness` category, plus type-aware linting via `oxlint-tsgolint`.
+  // Default plugins (`typescript`, `unicorn`, `oxc`), every category oxlint
+  // considers a defect or a code smell, and type-aware linting via
+  // `oxlint-tsgolint`. `perf` and `style` are the two categories left off.
   categories: {
     correctness: "error",
+    suspicious: "error",
+    pedantic: "error",
+    restriction: "error",
   },
   options: {
     maxWarnings: 0,
     typeAware: true,
   },
-  // These rules were enabled by `eslint:recommended` and
-  // `typescript-eslint:recommended-type-checked`, but oxlint classifies them as
-  // `suspicious`, `pedantic` or `restriction` rather than `correctness`. They
-  // are listed explicitly so that dropping ESLint does not lose any of them.
   rules: {
-    "eslint/no-array-constructor": "error",
-    "eslint/no-case-declarations": "error",
-    "eslint/no-empty": "error",
-    "eslint/no-fallthrough": "error",
-    "eslint/no-prototype-builtins": "error",
-    "eslint/no-redeclare": "error",
-    "eslint/no-regex-spaces": "error",
-    "eslint/no-unexpected-multiline": "error",
-    "eslint/preserve-caught-error": "error",
-    "typescript/ban-ts-comment": "error",
-    "typescript/no-empty-object-type": "error",
-    "typescript/no-explicit-any": "error",
-    "typescript/no-misused-promises": "error",
-    "typescript/no-namespace": "error",
-    "typescript/no-require-imports": "error",
-    "typescript/no-unnecessary-type-assertion": "error",
-    "typescript/no-unnecessary-type-constraint": "error",
-    "typescript/no-unsafe-argument": "error",
-    "typescript/no-unsafe-assignment": "error",
-    "typescript/no-unsafe-call": "error",
-    "typescript/no-unsafe-enum-comparison": "error",
-    "typescript/no-unsafe-function-type": "error",
-    "typescript/no-unsafe-member-access": "error",
-    "typescript/no-unsafe-return": "error",
-    "typescript/only-throw-error": "error",
-    "typescript/prefer-promise-reject-errors": "error",
-    "typescript/require-await": "error",
-    "typescript/restrict-plus-operands": "error",
+    // `== null` is the intended idiom in `NullComparator`: it treats `null` and
+    // `undefined` as one case, which is exactly what the nulls-first/nulls-last
+    // comparators are specified to do. `no-eq-null` exists only to forbid that
+    // idiom, so it goes off with it.
+    "eslint/eqeqeq": ["error", "always", { null: "ignore" }],
+    "eslint/no-eq-null": "off",
+
+    // Would put `readonly` on the parameters of `CompareFn` and `Comparator`,
+    // changing the published type surface. typescript-eslint keeps this out of
+    // its `strict` preset for the same reason.
+    "typescript/prefer-readonly-parameter-types": "off",
   },
+  overrides: [
+    {
+      // These tests exist to prove the comparators work as `Array#sort`
+      // arguments, so the mutating call is the thing under test.
+      files: ["**/*.test.ts"],
+      rules: {
+        "unicorn/no-array-sort": "off",
+      },
+    },
+  ],
 });

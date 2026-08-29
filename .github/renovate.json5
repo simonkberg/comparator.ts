@@ -25,11 +25,14 @@
       matchPackageNames: ["oxlint", "oxlint-tsgolint", "oxfmt"],
     },
     {
-      // The `typedoc>typescript` override in pnpm-workspace.yaml deliberately
-      // holds TypeDoc on TypeScript 6; bumping it to 7 breaks `pnpm build:docs`.
-      matchFileNames: ["pnpm-workspace.yaml"],
+      // tools/typedoc exists only to hold TypeDoc on TypeScript 6, which is
+      // the newest major its peer range accepts and the newest it can load at
+      // all — TypeScript 7 crashes it on startup and breaks `pnpm build:docs`.
+      // Patch updates within 6.0.x are still welcome. This does not constrain
+      // the root workspace, which tracks TypeScript 7.
+      matchFileNames: ["tools/typedoc/package.json"],
       matchPackageNames: ["typescript"],
-      enabled: false,
+      allowedVersions: "6.0.x",
     },
   ],
 }

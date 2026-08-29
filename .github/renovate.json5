@@ -11,4 +11,12 @@
     automerge: true,
   },
   postUpdateOptions: ["pnpmDedupe"],
+  packageRules: [
+    {
+      // Changesets releases the CLI, its changelog generators and the GitHub
+      // action in lockstep, and their majors need migrating together.
+      groupName: "changesets",
+      matchPackageNames: ["@changesets/**", "changesets/action"],
+    },
+  ],
 }

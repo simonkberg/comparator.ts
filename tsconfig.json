@@ -8,6 +8,10 @@
   "compilerOptions": {
     "incremental": true,
     "types": ["node"],
+    // Without these the `.js` files sit outside the program and oxlint's
+    // type-aware rules see every value in them as `error`-typed.
+    "allowJs": true,
+    "checkJs": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "rewriteRelativeImportExtensions": true,

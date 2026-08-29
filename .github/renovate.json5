@@ -18,5 +18,16 @@
       groupName: "changesets",
       matchPackageNames: ["@changesets/**", "changesets/action"],
     },
+    {
+      // These share a release train, and oxlint-tsgolint tracks a TypeScript version.
+      groupName: "oxc",
+      matchPackageNames: ["oxlint", "oxlint-tsgolint", "oxfmt"],
+    },
+    {
+      // TypeDoc crashes on startup under TypeScript 7; 6.0.x is its peer cap.
+      matchFileNames: ["tools/typedoc/package.json"],
+      matchPackageNames: ["typescript"],
+      allowedVersions: "6.0.x",
+    },
   ],
 }

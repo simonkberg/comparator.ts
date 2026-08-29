@@ -1,0 +1,11 @@
+{
+  "name": "@comparator.ts/typedoc",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Isolates TypeDoc's TypeScript peer dependency from the root workspace.",
+  "devDependencies": {
+    "typedoc": "0.28.20",
+    "typedoc-plugin-markdown": "4.13.0",
+    "typescript": "6.0.3"
+  }
+}

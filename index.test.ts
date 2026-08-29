@@ -1,6 +1,6 @@
 /// <reference lib="es2023" />
 
-/* eslint-disable @typescript-eslint/no-floating-promises */
+/* oxlint-disable typescript/no-floating-promises */
 import assert from "node:assert/strict";
 import { describe, it, test } from "node:test";
 
@@ -119,11 +119,7 @@ describe("booleanComparator", () => {
   });
 
   it("should be possible to pass compare method to sort method", () => {
-    assert.deepEqual([true, false, true].sort(booleanComparator), [
-      false,
-      true,
-      true,
-    ]);
+    assert.deepEqual([true, false, true].sort(booleanComparator), [false, true, true]);
   });
 });
 
@@ -141,11 +137,7 @@ describe("dateComparator", () => {
     const date1 = new Date("2023-01-01");
     const date2 = new Date("2023-01-02");
     const date3 = new Date("2023-01-03");
-    assert.deepEqual([date2, date1, date3].sort(dateComparator), [
-      date1,
-      date2,
-      date3,
-    ]);
+    assert.deepEqual([date2, date1, date3].sort(dateComparator), [date1, date2, date3]);
   });
 });
 
@@ -199,9 +191,7 @@ test("example", () => {
     stringComparator,
   );
 
-  const sortedData = data.toSorted(
-    compareByEnabled.thenComparing(compareByName),
-  );
+  const sortedData = data.toSorted(compareByEnabled.thenComparing(compareByName));
 
   assert.deepEqual(sortedData, [
     { enabled: true, name: "Feature C" },

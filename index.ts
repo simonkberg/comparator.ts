@@ -64,23 +64,21 @@ export interface Comparator<T> extends CompareFn<T> {
  * @public
  */
 export const comparator = <T>(compareFn: CompareFn<T>): Comparator<T> => {
-  function Comparator(a: T, b: T) {
+  function Comparator(a: T, b: T): number {
     return compareFn(a, b);
   }
 
-  Comparator.thenComparing = function CompoundComparator(other: Comparator<T>) {
+  Comparator.thenComparing = function CompoundComparator(other: Comparator<T>): Comparator<T> {
     return comparator<T>((a, b) => {
       const result = Comparator(a, b);
-      return result !== 0 ? result : other(a, b);
+      return result === 0 ? other(a, b) : result;
     });
   };
 
   let reversed: Comparator<T> | null = null;
 
-  Comparator.reversed = function ReverseComparator() {
-    if (reversed === null) {
-      reversed = comparator<T>((a, b) => Comparator(b, a));
-    }
+  Comparator.reversed = function ReverseComparator(): Comparator<T> {
+    reversed ??= comparator<T>((a, b) => Comparator(b, a));
 
     return reversed;
   };
@@ -121,10 +119,8 @@ export const comparator = <T>(compareFn: CompareFn<T>): Comparator<T> => {
  *   mapped values.
  * @public
  */
-export const comparing = <T, U>(
-  mapper: (object: T) => U,
-  compareFn: CompareFn<U>,
-): Comparator<T> => comparator<T>((a, b) => compareFn(mapper(a), mapper(b)));
+export const comparing = <T, U>(mapper: (object: T) => U, compareFn: CompareFn<U>): Comparator<T> =>
+  comparator<T>((a, b) => compareFn(mapper(a), mapper(b)));
 
 /**
  * A {@link Comparator} for comparing strings using locale-specific ordering.
@@ -139,9 +135,7 @@ export const comparing = <T, U>(
  * @returns A {@link Comparator} instance for comparing strings.
  * @public
  */
-export const stringComparator = comparator<string>((a, b) =>
-  a.localeCompare(b),
-);
+export const stringComparator = comparator<string>((a, b) => a.localeCompare(b));
 
 /**
  * A {@link Comparator} for comparing numbers in ascending order.
@@ -172,9 +166,7 @@ export const numberComparator = comparator<number>((a, b) => a - b);
  * @returns A {@link Comparator} instance for comparing boolean values.
  * @public
  */
-export const booleanComparator = comparator<boolean>((a, b) =>
-  a === b ? 0 : a ? 1 : -1,
-);
+export const booleanComparator = comparator<boolean>((a, b) => (a === b ? 0 : a ? 1 : -1));
 
 /**
  * A {@link Comparator} for comparing `Date` objects in ascending order based on
@@ -193,9 +185,7 @@ export const booleanComparator = comparator<boolean>((a, b) =>
  * @returns A {@link Comparator} instance for comparing `Date` objects.
  * @public
  */
-export const dateComparator = comparator<Date>(
-  (a, b) => a.getTime() - b.getTime(),
-);
+export const dateComparator = comparator<Date>((a, b) => a.getTime() - b.getTime());
 
 /**
  * Creates a {@link Comparator} that handles `null` or `undefined` values. It
@@ -246,7 +236,7 @@ function NullComparator<T>(
  *   function.
  * @public
  */
-export const nullsFirst = <T>(compareFn: CompareFn<T>) =>
+export const nullsFirst = <T>(compareFn: CompareFn<T>): Comparator<T | null | undefined> =>
   NullComparator(true, compareFn);
 
 /**
@@ -269,5 +259,5 @@ export const nullsFirst = <T>(compareFn: CompareFn<T>) =>
  *   provided function.
  * @public
  */
-export const nullsLast = <T>(compareFn: CompareFn<T>) =>
+export const nullsLast = <T>(compareFn: CompareFn<T>): Comparator<T | null | undefined> =>
   NullComparator(false, compareFn);

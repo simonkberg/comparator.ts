@@ -10,7 +10,7 @@
 function comparing<T, U>(mapper, compareFn): Comparator<T>;
 ```
 
-Defined in: [index.ts:124](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L124)
+Defined in: [index.ts:122](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L122)
 
 Creates a [Comparator](Interface.Comparator.md) that compares objects of type `T` by mapping them
 to values of type `U` using a provided mapping function and then comparing
@@ -46,10 +46,7 @@ const people: Person[] = [
   { name: "Bob", age: 25 },
   { name: "Charlie", age: 35 },
 ];
-const ageComparator = comparing<Person, number>(
-  (person) => person.age,
-  numberComparator,
-);
+const ageComparator = comparing<Person, number>((person) => person.age, numberComparator);
 const sortedPeople = people.sort(ageComparator);
 console.log(sortedPeople); // Outputs the array sorted by age in ascending order.
 ```

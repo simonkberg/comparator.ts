@@ -4,7 +4,7 @@
 
 [comparator.ts](index.md) / CompareFn
 
-# Type Alias: CompareFn()\<T\>
+# Type Alias: CompareFn\<T\>
 
 ```ts
 type CompareFn<T> = (a, b) => number;

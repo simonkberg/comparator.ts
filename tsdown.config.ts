@@ -1,8 +1,6 @@
 import { defineConfig } from "tsdown";
 
 export default defineConfig((options) => {
-  // `watch` is `boolean | string | string[] | undefined`, so cast explicitly
-  // rather than relying on the truthiness of a mixed union.
   const watching = Boolean(options.watch);
 
   return {

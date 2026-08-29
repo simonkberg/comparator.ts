@@ -8,8 +8,8 @@
   "compilerOptions": {
     "incremental": true,
     "types": ["node"],
-    // Puts the `.js` config and helper scripts in the program so that oxlint's
-    // type-aware rules can see real types for them instead of `error`.
+    // Without these the `.js` files sit outside the program and oxlint's
+    // type-aware rules see every value in them as `error`-typed.
     "allowJs": true,
     "checkJs": true,
     "module": "esnext",

@@ -1,11 +1,7 @@
 # @comparator.ts/typedoc
 
-TypeDoc does not support the TypeScript 7 compiler API yet — it crashes on
-startup when it resolves against it. The root workspace is on TypeScript 7, so
-TypeDoc lives in this private package instead, where its `typescript` peer
-dependency resolves to TypeScript 6.
+TypeDoc crashes on startup under TypeScript 7, and the root workspace is on 7.
+This private package exists so its `typescript` peer resolves to 6 instead.
+Delete it once TypeDoc supports 7 and move the dependencies back to the root.
 
-Once TypeDoc supports TypeScript 7, this package can be deleted and its three
-dependencies moved back into the root `package.json`.
-
-Docs are still generated from the repository root, via `pnpm build:docs`.
+Docs are still built from the repository root, via `pnpm build:docs`.

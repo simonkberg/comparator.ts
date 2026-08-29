@@ -19,17 +19,12 @@
       matchPackageNames: ["@changesets/**", "changesets/action"],
     },
     {
-      // Oxlint, its type-aware backend and oxfmt share a release train, and
-      // oxlint-tsgolint is additionally tied to a TypeScript version.
+      // These share a release train, and oxlint-tsgolint tracks a TypeScript version.
       groupName: "oxc",
       matchPackageNames: ["oxlint", "oxlint-tsgolint", "oxfmt"],
     },
     {
-      // tools/typedoc exists only to hold TypeDoc on TypeScript 6, which is
-      // the newest major its peer range accepts and the newest it can load at
-      // all — TypeScript 7 crashes it on startup and breaks `pnpm build:docs`.
-      // Patch updates within 6.0.x are still welcome. This does not constrain
-      // the root workspace, which tracks TypeScript 7.
+      // TypeDoc crashes on startup under TypeScript 7; 6.0.x is its peer cap.
       matchFileNames: ["tools/typedoc/package.json"],
       matchPackageNames: ["typescript"],
       allowedVersions: "6.0.x",

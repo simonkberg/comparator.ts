@@ -8,12 +8,12 @@
 It's always a good idea to create an [issue] to discuss your ideas before you start working on them.
 
 > [!NOTE]
-> This project uses prettier and eslint to enforce code style. You can run `pnpm lint` to check
-> your code for style issues.
+> This project uses oxfmt and oxlint to enforce code style. You can run `pnpm lint` to check
+> your code for style issues, and `pnpm lint:fix` to fix what can be fixed automatically.
 >
 > To make it easier to keep your code style consistent, you can configure your editor to
-> automatically format your code on save. See the [prettier documentation] and
-> the [eslint documentation] for instructions on how to do this.
+> automatically format your code on save. See the [oxfmt documentation] and
+> the [oxlint documentation] for instructions on how to do this.
 
 ## Fork the repository
 
@@ -47,7 +47,7 @@ Once that is done, a maintainer will merge it and publish a new version of the p
 [Node.js]: https://nodejs.org/en/
 [pnpm]: https://pnpm.io/
 [issue]: https://github.com/simonkberg/comparator.ts/issues/new
-[prettier documentation]: https://prettier.io/docs/en/editors.html
-[eslint documentation]: https://eslint.org/docs/user-guide/integrations
+[oxfmt documentation]: https://oxc.rs/docs/guide/usage/formatter.html
+[oxlint documentation]: https://oxc.rs/docs/guide/usage/linter.html
 [`gh`]: https://cli.github.com/
 [gh-configure]: https://cli.github.com/manual/#configuration

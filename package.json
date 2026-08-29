@@ -3,37 +3,34 @@
   "version": "1.0.4",
   "description": "A TypeScript library for comparing values",
   "homepage": "https://github.com/simonkberg/comparator.ts#readme",
+  "license": "MIT",
+  "author": "Simon Kjellberg <simon.kjellberg@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/simonkberg/comparator.ts.git"
   },
-  "license": "MIT",
-  "author": "Simon Kjellberg <simon.kjellberg@gmail.com>",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "type": "module",
+  "main": "dist/index.cjs",
   "exports": {
     ".": {
       "require": "./dist/index.cjs",
       "import": "./dist/index.mjs"
     }
   },
-  "main": "dist/index.cjs",
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "engines": {
-    "node": ">=22"
-  },
   "scripts": {
     "build": "pnpm build:ts && pnpm build:docs",
-    "build:docs": "typedoc",
+    "build:docs": "pnpm --filter @comparator.ts/typedoc exec typedoc --options ../../typedoc.json && oxfmt docs",
     "build:ts": "tsdown",
-    "lint": "pnpm lint:eslint && pnpm lint:prettier",
-    "lint:eslint": "eslint --max-warnings=0 .",
-    "lint:eslint:fix": "eslint --max-warnings=0 --fix .",
-    "lint:fix": "pnpm lint:eslint:fix && pnpm lint:prettier:fix",
-    "lint:prettier": "prettier --check .",
-    "lint:prettier:fix": "prettier --write .",
+    "lint": "pnpm lint:oxlint && pnpm lint:oxfmt",
+    "lint:fix": "pnpm lint:oxlint:fix && pnpm lint:oxfmt:fix",
+    "lint:oxfmt": "oxfmt --check .",
+    "lint:oxfmt:fix": "oxfmt .",
+    "lint:oxlint": "oxlint .",
+    "lint:oxlint:fix": "oxlint --fix .",
     "prepare": "husky",
     "prerelease": "pnpm build",
     "release": "changeset publish",
@@ -44,25 +41,21 @@
     "@arethetypeswrong/core": "0.18.5",
     "@changesets/changelog-github": "1.0.0",
     "@changesets/cli": "3.0.1",
-    "@eslint/js": "10.0.1",
     "@tsconfig/node22": "22.0.6",
     "@tsconfig/recommended": "1.0.13",
     "@tsconfig/strictest": "2.0.8",
     "@types/node": "22.20.1",
-    "eslint": "10.9.1",
-    "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-simple-import-sort": "14.0.0",
-    "eslint-plugin-tsdoc": "0.5.2",
     "husky": "9.1.7",
     "lint-staged": "17.3.0",
-    "prettier": "3.9.6",
-    "prettier-plugin-jsdoc": "1.8.1",
+    "oxfmt": "0.65.0",
+    "oxlint": "1.80.0",
+    "oxlint-tsgolint": "7.0.2001",
     "publint": "0.3.24",
     "tsdown": "0.22.14",
-    "typedoc": "0.28.20",
-    "typedoc-plugin-markdown": "4.13.0",
-    "typescript": "6.0.3",
-    "typescript-eslint": "8.68.0"
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
   },
   "packageManager": "pnpm@11.24.0+sha512.bd27e345e976dcb0be0b7a1228217b049a817e21b1f355c90dbe7dc46671895a8bc1e6d06c24554505ea93ea0b45f489a27ec1bfbc8de6a9659fca0f16fa0000"
 }

@@ -18,5 +18,18 @@
       groupName: "changesets",
       matchPackageNames: ["@changesets/**", "changesets/action"],
     },
+    {
+      // Oxlint, its type-aware backend and oxfmt share a release train, and
+      // oxlint-tsgolint is additionally tied to a TypeScript version.
+      groupName: "oxc",
+      matchPackageNames: ["oxlint", "oxlint-tsgolint", "oxfmt"],
+    },
+    {
+      // The `typedoc>typescript` override in pnpm-workspace.yaml deliberately
+      // holds TypeDoc on TypeScript 6; bumping it to 7 breaks `pnpm build:docs`.
+      matchFileNames: ["pnpm-workspace.yaml"],
+      matchPackageNames: ["typescript"],
+      enabled: false,
+    },
   ],
 }

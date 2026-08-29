@@ -6,8 +6,8 @@ const sourceFilesRegex = /\.[cm]?[tj]sx?$/;
  * This ensures that all files are formatted, and that all source files are
  * linted, type-checked, and tested.
  *
- * The order of the commands is important! Eslint must run before Prettier to
- * ensure that any code changes made by ESLint are formatted correctly.
+ * The order of the commands is important! Oxlint must run before oxfmt to
+ * ensure that any code changes made by oxlint are formatted correctly.
  *
  * @type {import("lint-staged").Configuration}
  */
@@ -25,11 +25,11 @@ export default (filenames) => {
   }
 
   if (sourceFiles !== "") {
-    commands.push(`eslint --max-warnings=0 --fix ${sourceFiles}`);
+    commands.push(`oxlint --fix ${sourceFiles}`);
   }
 
   if (allFiles !== "") {
-    commands.push(`prettier --write --ignore-unknown ${allFiles}`);
+    commands.push(`oxfmt --no-error-on-unmatched-pattern ${allFiles}`);
   }
 
   if (sourceFiles !== "") {

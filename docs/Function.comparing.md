@@ -46,10 +46,7 @@ const people: Person[] = [
   { name: "Bob", age: 25 },
   { name: "Charlie", age: 35 },
 ];
-const ageComparator = comparing<Person, number>(
-  (person) => person.age,
-  numberComparator,
-);
+const ageComparator = comparing<Person, number>((person) => person.age, numberComparator);
 const sortedPeople = people.sort(ageComparator);
 console.log(sortedPeople); // Outputs the array sorted by age in ascending order.
 ```

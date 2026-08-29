@@ -1,2 +1,6 @@
+packages:
+  - .
+  - tools/typedoc
+
 allowBuilds:
   esbuild: false

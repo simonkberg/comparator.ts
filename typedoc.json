@@ -9,7 +9,5 @@
   "useCodeBlocks": true,
   "indexFormat": "table",
   "parametersFormat": "table",
-  "formatWithPrettier": true,
-  "prettierConfigFile": "./prettier.config.js",
   "gitRevision": "main"
 }

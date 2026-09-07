@@ -39,8 +39,8 @@
   },
   "devDependencies": {
     "@arethetypeswrong/core": "0.18.5",
-    "@changesets/changelog-github": "1.0.0",
-    "@changesets/cli": "3.0.1",
+    "@changesets/changelog-github": "1.0.1",
+    "@changesets/cli": "3.0.2",
     "@tsconfig/node22": "22.0.6",
     "@tsconfig/recommended": "1.0.13",
     "@tsconfig/strictest": "2.0.8",

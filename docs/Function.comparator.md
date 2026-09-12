@@ -10,7 +10,7 @@
 function comparator<T>(compareFn): Comparator<T>;
 ```
 
-Defined in: [index.ts:298](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L298)
+Defined in: [index.ts:201](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L201)
 
 Creates a [Comparator](Interface.Comparator.md) from a compare function.
 

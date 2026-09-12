@@ -10,7 +10,7 @@
 const bigintComparator: Comparator<bigint>;
 ```
 
-Defined in: [index.ts:401](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L401)
+Defined in: [index.ts:270](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L270)
 
 A [Comparator](Interface.Comparator.md) for comparing bigints in ascending order.
 

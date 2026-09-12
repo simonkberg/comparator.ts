@@ -17,27 +17,6 @@
 export type CompareFn<T> = (a: T, b: T) => number;
 
 /**
- * The kinds of values that {@link naturalOrder} can compare.
- *
- * @public
- */
-export type Comparable = number | bigint | string | boolean | Date;
-
-/**
- * The call signatures of {@link naturalOrder}. Each overload accepts one kind
- * of {@link Comparable} so that values of different kinds cannot be compared
- * by accident.
- *
- * @public
- */
-export interface NaturalOrder {
-  (a: number | bigint, b: number | bigint): number;
-  (a: string, b: string): number;
-  (a: boolean, b: boolean): number;
-  (a: Date, b: Date): number;
-}
-
-/**
  * A {@link CompareFn} with methods for deriving new comparators from it.
  *
  * @typeParam T - The type of values to be compared.
@@ -71,8 +50,8 @@ export interface Comparator<T> extends CompareFn<T> {
    *
    * ```ts
    * type Person = { name: string; age: number };
-   * const byAge = comparing((person: Person) => person.age);
-   * const byName = comparing((person: Person) => person.name);
+   * const byAge = comparing((person: Person) => person.age, numberComparator);
+   * const byName = comparing((person: Person) => person.name, stringComparator);
    * const byAgeThenName = byAge.thenWith(byName);
    * ```
    *
@@ -84,29 +63,6 @@ export interface Comparator<T> extends CompareFn<T> {
 
   /**
    * Creates a comparator that uses this comparator first and then breaks ties
-   * by comparing the values returned by `mapper` in their
-   * {@link naturalOrder | natural order}.
-   *
-   * A result of `0`, `-0`, or `NaN` from this comparator counts as a tie.
-   *
-   * @example
-   *
-   * ```ts
-   * type Person = { name: string; age: number };
-   * const byAgeThenName = comparing((person: Person) => person.age).thenBy(
-   *   (person) => person.name,
-   * );
-   * ```
-   *
-   * @param mapper - A function that maps a value of type `T` to a
-   *   {@link Comparable} value.
-   * @returns A {@link Comparator} that combines this comparator and the
-   *   natural order of the mapped values.
-   */
-  thenBy(mapper: (value: T) => Comparable): Comparator<T>;
-
-  /**
-   * Creates a comparator that uses this comparator first and then breaks ties
    * by comparing the values returned by `mapper` with `compareFn`.
    *
    * A result of `0`, `-0`, or `NaN` from this comparator counts as a tie.
@@ -115,10 +71,10 @@ export interface Comparator<T> extends CompareFn<T> {
    *
    * ```ts
    * type Person = { name: string; nickname?: string };
-   * const byNameThenNickname = comparing((person: Person) => person.name).thenBy(
-   *   (person) => person.nickname,
-   *   stringComparator.nullishLast(),
-   * );
+   * const byNameThenNickname = comparing(
+   *   (person: Person) => person.name,
+   *   stringComparator,
+   * ).thenBy((person) => person.nickname, stringComparator.nullishLast());
    * ```
    *
    * @typeParam U - The type of the mapped values.
@@ -170,61 +126,10 @@ export interface Comparator<T> extends CompareFn<T> {
   nullishLast(): Comparator<T | null | undefined>;
 }
 
-/**
- * Compares two values of the same {@link Comparable} kind in their natural
- * order.
- *
- * - `number` and `bigint` values compare numerically, and the two kinds may
- *   be mixed. `-0` equals `0`. `NaN` equals `NaN` and sorts after every other
- *   number, including `Infinity`.
- * - `string` values compare by UTF-16 code units, the order of `<` on strings.
- * - `boolean` values sort `false` before `true`.
- * - `Date` values compare by time value. Invalid dates equal each other and
- *   sort after every valid date.
- *
- * Comparing values of different kinds is a type error, and the result at
- * runtime is unspecified.
- *
- * @example
- *
- * ```ts
- * console.log([10, 9, 1].toSorted(naturalOrder)); // [1, 9, 10]
- * console.log([10, 9, 1].toSorted()); // [1, 10, 9]
- * ```
- *
- * @param a - The first value to compare.
- * @param b - The second value to compare.
- * @returns A negative number if `a` sorts before `b`, zero if they are equal,
- *   or a positive number if `a` sorts after `b`.
- * @public
- */
-export const naturalOrder: NaturalOrder = (a: Comparable, b: Comparable): number => {
-  if (a < b) return -1;
-  if (a > b) return 1;
-  if (a === b) return 0;
-  // Neither ordered nor identical: equal Dates, NaN, or invalid Dates.
-  const x = Number(a);
-  const y = Number(b);
-  if (x === y) return 0;
-  if (Number.isNaN(x)) return Number.isNaN(y) ? 0 : 1;
-  return -1;
-};
-
 const comparators = new WeakSet();
 
 const isComparator = <T>(compareFn: CompareFn<T>): compareFn is Comparator<T> =>
   comparators.has(compareFn);
-
-/**
- * Returns `compareFn`, or {@link naturalOrder} when it is omitted.
- *
- * @param compareFn - The compare function a caller passed, if any.
- * @returns A compare function for values of type `U`.
- */
-const orNaturalOrder = <U>(compareFn: CompareFn<U> | undefined): CompareFn<U> =>
-  // The public overloads only allow omitting `compareFn` when `U` is `Comparable`.
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
-  compareFn ?? (naturalOrder as CompareFn<U>);
 
 /**
  * Creates a compare function that places `null` and `undefined` on one side of
@@ -262,10 +167,8 @@ const create = <T>(compareFn: CompareFn<T>, reverse?: Comparator<T>): Comparator
     thenWith: (other: CompareFn<T>): Comparator<T> =>
       create((a, b) => compareFn(a, b) || other(a, b)),
 
-    thenBy: <U>(mapper: (value: T) => U, other?: CompareFn<U>): Comparator<T> => {
-      const compareMapped = orNaturalOrder(other);
-      return create((a, b) => compareFn(a, b) || compareMapped(mapper(a), mapper(b)));
-    },
+    thenBy: <U>(mapper: (value: T) => U, other: CompareFn<U>): Comparator<T> =>
+      create((a, b) => compareFn(a, b) || other(mapper(a), mapper(b))),
 
     nullishFirst: (): Comparator<T | null | undefined> => create(nullish(compareFn, -1)),
 
@@ -300,8 +203,7 @@ export const comparator = <T>(compareFn: CompareFn<T>): Comparator<T> =>
 
 /**
  * Creates a {@link Comparator} that compares values of type `T` by mapping them
- * to {@link Comparable} values and comparing those in their
- * {@link naturalOrder | natural order}.
+ * to values of type `U` and comparing those with `compareFn`.
  *
  * TypeScript cannot infer `T` from a later `sort` call, so annotate the
  * parameter of `mapper` or the type of the result.
@@ -314,33 +216,8 @@ export const comparator = <T>(compareFn: CompareFn<T>): Comparator<T> =>
  *   { name: "Alice", age: 30 },
  *   { name: "Bob", age: 25 },
  * ];
- * const byAge = comparing((person: Person) => person.age);
+ * const byAge = comparing((person: Person) => person.age, numberComparator);
  * console.log(people.toSorted(byAge)); // Bob, then Alice
- * ```
- *
- * @typeParam T - The type of values to be compared.
- * @param mapper - A function that maps a value of type `T` to a
- *   {@link Comparable} value.
- * @returns A {@link Comparator} for values of type `T` based on the natural
- *   order of their mapped values.
- * @public
- */
-export function comparing<T>(mapper: (value: T) => Comparable): Comparator<T>;
-/**
- * Creates a {@link Comparator} that compares values of type `T` by mapping them
- * to values of type `U` and comparing those with `compareFn`.
- *
- * TypeScript cannot infer `T` from a later `sort` call, so annotate the
- * parameter of `mapper` or the type of the result.
- *
- * @example
- *
- * ```ts
- * type Person = { name: string; nickname?: string };
- * const byNickname = comparing(
- *   (person: Person) => person.nickname,
- *   stringComparator.nullishLast(),
- * );
  * ```
  *
  * @typeParam T - The type of values to be compared.
@@ -352,39 +229,31 @@ export function comparing<T>(mapper: (value: T) => Comparable): Comparator<T>;
  *   applied to their mapped values.
  * @public
  */
-export function comparing<T, U>(mapper: (value: T) => U, compareFn: CompareFn<U>): Comparator<T>;
-export function comparing<T, U>(mapper: (value: T) => U, compareFn?: CompareFn<U>): Comparator<T> {
-  const compareMapped = orNaturalOrder(compareFn);
-  return create<T>((a, b) => compareMapped(mapper(a), mapper(b)));
-}
-
-/**
- * A {@link Comparator} for comparing strings using locale-specific ordering.
- *
- * @example
- *
- * ```ts
- * const result = stringComparator("apple", "banana");
- * console.log(result); // Outputs a negative number because "apple" comes before "banana".
- * ```
- *
- * @public
- */
-export const stringComparator = comparator<string>((a, b) => a.localeCompare(b));
+export const comparing = <T, U>(mapper: (value: T) => U, compareFn: CompareFn<U>): Comparator<T> =>
+  create((a, b) => compareFn(mapper(a), mapper(b)));
 
 /**
  * A {@link Comparator} for comparing numbers in ascending order.
+ *
+ * `-0` equals `0`. `NaN` equals `NaN` and sorts after every other number,
+ * including `Infinity`.
  *
  * @example
  *
  * ```ts
  * const result = numberComparator(10, 20);
  * console.log(result); // Outputs a negative number because 10 is less than 20.
+ * console.log([3, NaN, 1].toSorted(numberComparator)); // [1, 3, NaN]
  * ```
  *
  * @public
  */
-export const numberComparator = comparator<number>((a, b) => a - b);
+export const numberComparator = comparator<number>((a, b) => {
+  if (a < b) return -1;
+  if (a > b) return 1;
+  if (a === b) return 0;
+  return Number.isNaN(a) ? (Number.isNaN(b) ? 0 : 1) : -1;
+});
 
 /**
  * A {@link Comparator} for comparing bigints in ascending order.
@@ -398,7 +267,25 @@ export const numberComparator = comparator<number>((a, b) => a - b);
  *
  * @public
  */
-export const bigintComparator = comparator<bigint>(naturalOrder);
+export const bigintComparator = comparator<bigint>((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+
+/**
+ * A {@link Comparator} for comparing strings by their UTF-16 code units, the
+ * order of `<` on strings. Uppercase letters sort before lowercase letters.
+ *
+ * The result does not depend on the runtime's locale.
+ *
+ * @example
+ *
+ * ```ts
+ * const result = stringComparator("apple", "banana");
+ * console.log(result); // Outputs a negative number because "apple" comes before "banana".
+ * console.log(["b", "A", "a", "B"].toSorted(stringComparator)); // ["A", "B", "a", "b"]
+ * ```
+ *
+ * @public
+ */
+export const stringComparator = comparator<string>((a, b) => (a < b ? -1 : a > b ? 1 : 0));
 
 /**
  * A {@link Comparator} for comparing boolean values in ascending order, where
@@ -419,6 +306,8 @@ export const booleanComparator = comparator<boolean>((a, b) => (a === b ? 0 : a 
  * A {@link Comparator} for comparing `Date` objects in ascending order based on
  * their time values.
  *
+ * Invalid dates equal each other and sort after every valid date.
+ *
  * @example
  *
  * ```ts
@@ -431,4 +320,6 @@ export const booleanComparator = comparator<boolean>((a, b) => (a === b ? 0 : a 
  *
  * @public
  */
-export const dateComparator = comparator<Date>((a, b) => a.getTime() - b.getTime());
+export const dateComparator = comparator<Date>((a, b) =>
+  numberComparator(a.getTime(), b.getTime()),
+);

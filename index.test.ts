@@ -11,7 +11,6 @@ import {
   comparator,
   comparing,
   dateComparator,
-  naturalOrder,
   numberComparator,
   stringComparator,
 } from "./index.ts";
@@ -77,8 +76,8 @@ describe("thenWith", () => {
   const obj2b = { num: 2, str: "b" };
 
   it("should break ties with a comparator", () => {
-    const byNum = comparing((obj: TestObject) => obj.num);
-    const byStr = comparing((obj: TestObject) => obj.str);
+    const byNum = comparing((obj: TestObject) => obj.num, numberComparator);
+    const byStr = comparing((obj: TestObject) => obj.str, stringComparator);
     const cmp = byNum.thenWith(byStr);
     assert.ok(cmp(obj1a, obj2b) < 0);
     assert.ok(cmp(obj1a, obj1b) < 0);
@@ -87,7 +86,7 @@ describe("thenWith", () => {
   });
 
   it("should break ties with a plain compare function", () => {
-    const cmp = comparing((obj: TestObject) => obj.num).thenWith((a, b) =>
+    const cmp = comparing((obj: TestObject) => obj.num, numberComparator).thenWith((a, b) =>
       b.str.localeCompare(a.str),
     );
     assert.deepEqual([obj1a, obj2b, obj1b].toSorted(cmp), [obj1b, obj1a, obj2b]);
@@ -101,9 +100,9 @@ describe("thenWith", () => {
 
   it("should chain more than two comparators", () => {
     type Triple = { a: number; b: number; c: number };
-    const cmp = comparing((t: Triple) => t.a)
-      .thenWith(comparing((t: Triple) => t.b))
-      .thenWith(comparing((t: Triple) => t.c));
+    const cmp = comparing((t: Triple) => t.a, numberComparator)
+      .thenWith(comparing((t: Triple) => t.b, numberComparator))
+      .thenWith(comparing((t: Triple) => t.c, numberComparator));
     const sorted = [
       { a: 1, b: 2, c: 2 },
       { a: 1, b: 2, c: 1 },
@@ -125,13 +124,16 @@ describe("thenBy", () => {
   const bob = { name: "Bob", age: 30, nickname: "Bobby" };
   const carol = { name: "Carol", age: 25 };
 
-  it("should break ties by the natural order of the mapped values", () => {
-    const cmp = comparing((person: Person) => person.age).thenBy((person) => person.name);
+  it("should break ties by the mapped values", () => {
+    const cmp = comparing((person: Person) => person.age, numberComparator).thenBy(
+      (person) => person.name,
+      stringComparator,
+    );
     assert.deepEqual([bob, alice, carol].toSorted(cmp), [carol, alice, bob]);
   });
 
-  it("should break ties by the mapped values using a comparator", () => {
-    const cmp = comparing((person: Person) => person.age).thenBy(
+  it("should break ties by nullable mapped values", () => {
+    const cmp = comparing((person: Person) => person.age, numberComparator).thenBy(
       (person) => person.nickname,
       stringComparator.nullishLast(),
     );
@@ -140,9 +142,9 @@ describe("thenBy", () => {
 
   it("should chain more than two keys", () => {
     type Triple = { a: number; b: string; c: boolean };
-    const cmp = comparing((t: Triple) => t.a)
-      .thenBy((t) => t.b)
-      .thenBy((t) => t.c);
+    const cmp = comparing((t: Triple) => t.a, numberComparator)
+      .thenBy((t) => t.b, stringComparator)
+      .thenBy((t) => t.c, booleanComparator);
     const sorted = [
       { a: 1, b: "x", c: true },
       { a: 1, b: "x", c: false },
@@ -199,84 +201,30 @@ describe("nullishLast", () => {
   });
 });
 
-describe("naturalOrder", () => {
-  it("should compare numbers", () => {
-    assert.ok(naturalOrder(1, 2) < 0);
-    assert.ok(naturalOrder(2, 1) > 0);
-    assert.ok(naturalOrder(1, 1) === 0);
-    assert.ok(naturalOrder(-0, 0) === 0);
-    assert.ok(naturalOrder(Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY) === 0);
-    assert.ok(naturalOrder(Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY) < 0);
-  });
-
-  it("should sort NaN after every other number", () => {
-    assert.ok(naturalOrder(Number.NaN, Number.POSITIVE_INFINITY) > 0);
-    assert.ok(naturalOrder(Number.POSITIVE_INFINITY, Number.NaN) < 0);
-    assert.ok(naturalOrder(Number.NaN, Number.NaN) === 0);
-    assert.deepEqual([3, Number.NaN, 1, 2].toSorted(naturalOrder), [1, 2, 3, Number.NaN]);
-    assert.deepEqual([Number.NaN, 3, 1, 2].toSorted(naturalOrder), [1, 2, 3, Number.NaN]);
-  });
-
-  it("should compare bigints, also with numbers", () => {
-    assert.ok(naturalOrder(1n, 2n) < 0);
-    assert.ok(naturalOrder(2n, 1n) > 0);
-    assert.ok(naturalOrder(1n, 1n) === 0);
-    assert.ok(naturalOrder(1n, 2) < 0);
-    assert.ok(naturalOrder(3n, 2) > 0);
-    assert.ok(naturalOrder(2n, 2) === 0);
-    assert.ok(naturalOrder(2n ** 64n + 1n, 2 ** 64) > 0);
-  });
-});
-
-describe("naturalOrder for other kinds", () => {
-  it("should compare strings by code unit", () => {
-    assert.ok(naturalOrder("a", "b") < 0);
-    assert.ok(naturalOrder("b", "a") > 0);
-    assert.ok(naturalOrder("a", "a") === 0);
-    assert.deepEqual(["b", "A", "a", "B"].toSorted(naturalOrder), ["A", "B", "a", "b"]);
-  });
-
-  it("should compare booleans", () => {
-    assert.ok(naturalOrder(false, true) < 0);
-    assert.ok(naturalOrder(true, false) > 0);
-    assert.ok(naturalOrder(true, true) === 0);
-    assert.ok(naturalOrder(false, false) === 0);
-  });
-
-  it("should compare dates by time value", () => {
-    assert.ok(naturalOrder(new Date(1), new Date(2)) < 0);
-    assert.ok(naturalOrder(new Date(2), new Date(1)) > 0);
-    assert.ok(naturalOrder(new Date(1), new Date(1)) === 0);
-  });
-
-  it("should sort invalid dates after every valid date", () => {
-    const invalid = new Date("invalid");
-    assert.ok(naturalOrder(invalid, new Date(0)) > 0);
-    assert.ok(naturalOrder(new Date(0), invalid) < 0);
-    assert.ok(naturalOrder(invalid, new Date("also invalid")) === 0);
-  });
-});
-
 describe("comparing", () => {
   type TestObject = { num: number };
   const obj1 = { num: 1 };
   const obj2 = { num: 2 };
   const obj3 = { num: 3 };
 
-  it("should compare by the natural order of the mapped values", () => {
-    const cmp = comparing((obj: TestObject) => obj.num);
+  it("should compare the mapped values using a comparator", () => {
+    const cmp = comparing((obj: TestObject) => obj.num, numberComparator);
     assert.ok(cmp(obj1, obj2) < 0);
     assert.ok(cmp(obj2, obj1) > 0);
     assert.ok(cmp(obj1, obj1) === 0);
+    assert.deepEqual([obj3, obj1, obj2].toSorted(cmp), [obj1, obj2, obj3]);
   });
 
-  it("should compare the mapped values using a comparator", () => {
-    const cmp = comparing((obj: TestObject) => obj.num, numberComparator.reversed());
+  it("should accept a plain compare function", () => {
+    const cmp = comparing(
+      (obj: TestObject) => obj.num,
+      (a, b) => b - a,
+    );
     assert.deepEqual([obj3, obj1, obj2].toSorted(cmp), [obj3, obj2, obj1]);
   });
 
-  it("should infer the mapped type from an annotated result", () => {
-    const cmp: Comparator<TestObject> = comparing((obj) => obj.num);
+  it("should infer the value type from an annotated result", () => {
+    const cmp: Comparator<TestObject> = comparing((obj) => obj.num, numberComparator);
     assert.deepEqual([obj3, obj1, obj2].toSorted(cmp), [obj1, obj2, obj3]);
   });
 });
@@ -286,6 +234,10 @@ describe("stringComparator", () => {
     assert.ok(stringComparator("a", "b") < 0);
     assert.ok(stringComparator("b", "a") > 0);
     assert.ok(stringComparator("a", "a") === 0);
+  });
+
+  it("should compare by code unit, independent of locale", () => {
+    assert.deepEqual(["b", "A", "a", "B"].toSorted(stringComparator), ["A", "B", "a", "b"]);
   });
 
   it("should be possible to pass compare method to sort method", () => {
@@ -298,6 +250,17 @@ describe("numberComparator", () => {
     assert.ok(numberComparator(1, 2) < 0);
     assert.ok(numberComparator(2, 1) > 0);
     assert.ok(numberComparator(1, 1) === 0);
+    assert.ok(numberComparator(-0, 0) === 0);
+    assert.ok(numberComparator(Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY) === 0);
+    assert.ok(numberComparator(Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY) < 0);
+  });
+
+  it("should sort NaN after every other number", () => {
+    assert.ok(numberComparator(Number.NaN, Number.POSITIVE_INFINITY) > 0);
+    assert.ok(numberComparator(Number.POSITIVE_INFINITY, Number.NaN) < 0);
+    assert.ok(numberComparator(Number.NaN, Number.NaN) === 0);
+    assert.deepEqual([3, Number.NaN, 1, 2].toSorted(numberComparator), [1, 2, 3, Number.NaN]);
+    assert.deepEqual([Number.NaN, 3, 1, 2].toSorted(numberComparator), [1, 2, 3, Number.NaN]);
   });
 
   it("should be possible to pass compare method to sort method", () => {
@@ -346,6 +309,13 @@ describe("dateComparator", () => {
     const date3 = new Date("2023-01-03");
     assert.deepEqual([date2, date1, date3].sort(dateComparator), [date1, date2, date3]);
   });
+
+  it("should sort invalid dates after every valid date", () => {
+    const invalid = new Date("invalid");
+    assert.ok(dateComparator(invalid, new Date(0)) > 0);
+    assert.ok(dateComparator(new Date(0), invalid) < 0);
+    assert.ok(dateComparator(invalid, new Date("also invalid")) === 0);
+  });
 });
 
 test("example", () => {
@@ -365,7 +335,9 @@ test("example", () => {
     booleanComparator.reversed().nullishLast(),
   );
 
-  const sortedData = data.toSorted(compareByEnabled.thenBy((feature) => feature.name));
+  const sortedData = data.toSorted(
+    compareByEnabled.thenBy((feature) => feature.name, stringComparator),
+  );
 
   assert.deepEqual(sortedData, [
     { enabled: true, name: "Feature C" },

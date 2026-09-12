@@ -6,7 +6,7 @@
 
 # Interface: Comparator()\<T\>
 
-Defined in: [index.ts:46](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L46)
+Defined in: [index.ts:25](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L25)
 
 A [CompareFn](TypeAlias.CompareFn.md) with methods for deriving new comparators from it.
 
@@ -24,7 +24,7 @@ A [CompareFn](TypeAlias.CompareFn.md) with methods for deriving new comparators 
 Comparator(a, b): number;
 ```
 
-Defined in: [index.ts:46](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L46)
+Defined in: [index.ts:17](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L17)
 
 A [CompareFn](TypeAlias.CompareFn.md) with methods for deriving new comparators from it.
 
@@ -47,7 +47,7 @@ A [CompareFn](TypeAlias.CompareFn.md) with methods for deriving new comparators 
 nullishFirst(): Comparator<T | null | undefined>;
 ```
 
-Defined in: [index.ts:152](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L152)
+Defined in: [index.ts:108](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L108)
 
 Creates a comparator that sorts `null` and `undefined` before all other
 values and delegates the comparison of other values to this comparator.
@@ -79,7 +79,7 @@ console.log([3, null, 1].toSorted(cmp)); // [null, 1, 3]
 nullishLast(): Comparator<T | null | undefined>;
 ```
 
-Defined in: [index.ts:170](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L170)
+Defined in: [index.ts:126](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L126)
 
 Creates a comparator that sorts `null` and `undefined` after all other
 values and delegates the comparison of other values to this comparator.
@@ -108,7 +108,7 @@ console.log([3, null, 1].toSorted(cmp)); // [1, 3, null]
 reversed(): Comparator<T>;
 ```
 
-Defined in: [index.ts:62](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L62)
+Defined in: [index.ts:41](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L41)
 
 Creates a comparator that imposes the reverse order of this comparator.
 
@@ -132,78 +132,42 @@ console.log(descending.reversed() === numberComparator); // true
 
 ### thenBy()
 
-#### Call Signature
-
-```ts
-thenBy(mapper): Comparator<T>;
-```
-
-Defined in: [index.ts:106](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L106)
-
-Creates a comparator that uses this comparator first and then breaks ties
-by comparing the values returned by `mapper` in their
-[natural order](Variable.naturalOrder.md).
-
-A result of `0`, `-0`, or `NaN` from this comparator counts as a tie.
-
-##### Parameters
-
-| Parameter | Type                                                 | Description                                                                                |
-| --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `mapper`  | (`value`) => [`Comparable`](TypeAlias.Comparable.md) | A function that maps a value of type `T` to a [Comparable](TypeAlias.Comparable.md) value. |
-
-##### Returns
-
-`Comparator`\<`T`\>
-
-A Comparator that combines this comparator and the
-natural order of the mapped values.
-
-##### Example
-
-```ts
-type Person = { name: string; age: number };
-const byAgeThenName = comparing((person: Person) => person.age).thenBy((person) => person.name);
-```
-
-#### Call Signature
-
 ```ts
 thenBy<U>(mapper, compareFn): Comparator<T>;
 ```
 
-Defined in: [index.ts:131](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L131)
+Defined in: [index.ts:87](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L87)
 
 Creates a comparator that uses this comparator first and then breaks ties
 by comparing the values returned by `mapper` with `compareFn`.
 
 A result of `0`, `-0`, or `NaN` from this comparator counts as a tie.
 
-##### Type Parameters
+#### Type Parameters
 
 | Type Parameter | Description                    |
 | -------------- | ------------------------------ |
 | `U`            | The type of the mapped values. |
 
-##### Parameters
+#### Parameters
 
 | Parameter   | Type                                         | Description                                                      |
 | ----------- | -------------------------------------------- | ---------------------------------------------------------------- |
 | `mapper`    | (`value`) => `U`                             | A function that maps a value of type `T` to a value of type `U`. |
 | `compareFn` | [`CompareFn`](TypeAlias.CompareFn.md)\<`U`\> | A function that compares two mapped values.                      |
 
-##### Returns
+#### Returns
 
 `Comparator`\<`T`\>
 
 A Comparator that combines this comparator and
 `compareFn` applied to the mapped values.
 
-##### Example
+#### Example
 
 ```ts
 type Person = { name: string; nickname?: string };
-const byNameThenNickname = comparing((person: Person) => person.name).thenBy(
+const byNameThenNickname = comparing((person: Person) => person.name, stringComparator).thenBy(
   (person) => person.nickname,
   stringComparator.nullishLast(),
 );
@@ -217,7 +181,7 @@ const byNameThenNickname = comparing((person: Person) => person.name).thenBy(
 thenWith(compareFn): Comparator<T>;
 ```
 
-Defined in: [index.ts:83](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L83)
+Defined in: [index.ts:62](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L62)
 
 Creates a comparator that uses this comparator first and then breaks ties
 with the provided compare function.
@@ -241,7 +205,7 @@ A Comparator that combines this comparator and
 
 ```ts
 type Person = { name: string; age: number };
-const byAge = comparing((person: Person) => person.age);
-const byName = comparing((person: Person) => person.name);
+const byAge = comparing((person: Person) => person.age, numberComparator);
+const byName = comparing((person: Person) => person.name, stringComparator);
 const byAgeThenName = byAge.thenWith(byName);
 ```

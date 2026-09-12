@@ -323,3 +323,40 @@ export const booleanComparator = comparator<boolean>((a, b) => (a === b ? 0 : a 
 export const dateComparator = comparator<Date>((a, b) =>
   numberComparator(a.getTime(), b.getTime()),
 );
+
+const defaultLocaleComparator = create<string>((a, b) => a.localeCompare(b));
+
+/**
+ * Creates a {@link Comparator} for comparing strings using locale-aware
+ * ordering. The result is equivalent to `String.prototype.localeCompare`
+ * called with the same `locales` and `options`.
+ *
+ * The order depends on the locale and on the runtime's locale data, and
+ * collation is slower than {@link stringComparator}. Use it for text a person
+ * reads, and {@link stringComparator} where the order must be the same
+ * everywhere.
+ *
+ * Without arguments, the same shared comparator is returned on every call.
+ * With arguments, a new comparator backed by an `Intl.Collator` is created.
+ *
+ * @example
+ *
+ * ```ts
+ * console.log(["b", "A", "a", "B"].toSorted(localeComparator("en"))); // ["a", "A", "b", "B"]
+ * console.log(["a10", "a9"].toSorted(localeComparator("en", { numeric: true }))); // ["a9", "a10"]
+ * ```
+ *
+ * @param locales - The locale or locales to collate by. Defaults to the
+ *   runtime's default locale.
+ * @param options - Collation options such as `numeric` or `sensitivity`.
+ * @returns A {@link Comparator} that compares strings by locale.
+ * @public
+ */
+export const localeComparator = (
+  locales?: Intl.LocalesArgument,
+  options?: Intl.CollatorOptions,
+): Comparator<string> => {
+  if (locales == null && options == null) return defaultLocaleComparator;
+  const collator = new Intl.Collator(locales, options);
+  return create((a, b) => collator.compare(a, b));
+};

@@ -4,13 +4,17 @@
 import assert from "node:assert/strict";
 import { describe, it, test } from "node:test";
 
+import fc from "fast-check";
+
 import {
   bigintComparator,
   booleanComparator,
+  type CompareFn,
   type Comparator,
   comparator,
   comparing,
   dateComparator,
+  localeComparator,
   numberComparator,
   stringComparator,
 } from "./index.ts";
@@ -245,6 +249,34 @@ describe("stringComparator", () => {
   });
 });
 
+describe("localeComparator", () => {
+  it("should compare strings by locale", () => {
+    const cmp = localeComparator("en");
+    assert.ok(cmp("a", "b") < 0);
+    assert.ok(cmp("b", "a") > 0);
+    assert.ok(cmp("a", "a") === 0);
+    assert.deepEqual(["b", "A", "a", "B"].toSorted(cmp), ["a", "A", "b", "B"]);
+  });
+
+  it("should pass collator options through", () => {
+    assert.deepEqual(["a10", "a9"].toSorted(localeComparator("en", { numeric: true })), [
+      "a9",
+      "a10",
+    ]);
+    assert.ok(localeComparator("en", { sensitivity: "base" })("a", "A") === 0);
+  });
+
+  it("should be a comparator", () => {
+    assert.deepEqual(["a", "b"].toSorted(localeComparator("en").reversed()), ["b", "a"]);
+  });
+
+  it("should share one comparator for the default locale", () => {
+    assert.strictEqual(localeComparator(), localeComparator());
+    assert.notStrictEqual(localeComparator("en"), localeComparator("en"));
+    assert.deepEqual(["b", "A", "a", "B"].toSorted(localeComparator()), ["a", "A", "b", "B"]);
+  });
+});
+
 describe("numberComparator", () => {
   it("should be a number comparator", () => {
     assert.ok(numberComparator(1, 2) < 0);
@@ -315,6 +347,76 @@ describe("dateComparator", () => {
     assert.ok(dateComparator(invalid, new Date(0)) > 0);
     assert.ok(dateComparator(new Date(0), invalid) < 0);
     assert.ok(dateComparator(invalid, new Date("also invalid")) === 0);
+  });
+});
+
+/**
+ * Checks that `compareFn` is a total order over values from `arbitrary`:
+ * reflexive, antisymmetric, transitive, and independent of input order.
+ */
+const assertTotalOrder = <T>(arbitrary: fc.Arbitrary<T>, compareFn: CompareFn<T>): void => {
+  fc.assert(
+    fc.property(arbitrary, arbitrary, (a, b) => {
+      assert.ok(compareFn(a, a) === 0);
+      assert.ok(Math.sign(compareFn(a, b)) + Math.sign(compareFn(b, a)) === 0);
+    }),
+  );
+  fc.assert(
+    fc.property(arbitrary, arbitrary, arbitrary, (a, b, c) => {
+      if (compareFn(a, b) <= 0 && compareFn(b, c) <= 0) {
+        assert.ok(compareFn(a, c) <= 0);
+      }
+    }),
+  );
+  fc.assert(
+    fc.property(fc.array(arbitrary), (values) => {
+      const sorted = values.toSorted(compareFn);
+      const sortedFromReversed = values.toReversed().toSorted(compareFn);
+      assert.equal(sortedFromReversed.length, sorted.length);
+      for (const [i, value] of sorted.entries()) {
+        const other = sortedFromReversed[i];
+        assert.ok(other !== undefined && compareFn(value, other) === 0);
+      }
+    }),
+  );
+};
+
+describe("total order laws", () => {
+  it("hold for numberComparator", () => {
+    assertTotalOrder(fc.double(), numberComparator);
+  });
+
+  it("hold for bigintComparator", () => {
+    assertTotalOrder(fc.bigInt(), bigintComparator);
+  });
+
+  it("hold for stringComparator", () => {
+    assertTotalOrder(fc.string(), stringComparator);
+  });
+
+  it("hold for localeComparator", () => {
+    assertTotalOrder(fc.string(), localeComparator());
+    assertTotalOrder(fc.string(), localeComparator("en"));
+  });
+
+  it("hold for booleanComparator", () => {
+    assertTotalOrder(fc.boolean(), booleanComparator);
+  });
+
+  it("hold for dateComparator", () => {
+    assertTotalOrder(fc.date(), dateComparator);
+  });
+
+  it("hold for a derived comparator", () => {
+    type Row = { key: number | null | undefined; label: string };
+    const rows = fc.record({
+      key: fc.oneof(fc.double(), fc.constant(null), fc.constant(undefined)),
+      label: fc.string(),
+    });
+    const cmp = comparing((row: Row) => row.key, numberComparator.nullishLast())
+      .thenBy((row) => row.label, stringComparator)
+      .reversed();
+    assertTotalOrder(rows, cmp);
   });
 });
 

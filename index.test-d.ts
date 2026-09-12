@@ -10,6 +10,7 @@ import {
   comparator,
   comparing,
   dateComparator,
+  localeComparator,
   numberComparator,
   stringComparator,
 } from "./index.ts";
@@ -29,6 +30,7 @@ export const byNickname = comparing(
   stringComparator.nullishLast(),
 );
 export const byBorn = comparing((person: Person) => person.born, dateComparator);
+export const byLocaleName = comparing((person: Person) => person.name, localeComparator("sv"));
 export const byId = comparing((person: Person) => person.id, bigintComparator);
 
 // `thenBy` infers the mapper parameter from the receiver.

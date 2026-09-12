@@ -10,15 +10,19 @@
 function localeComparator(locales?, options?): Comparator<string>;
 ```
 
-Defined in: [index.ts:349](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L349)
+Defined in: [index.ts:355](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L355)
 
 Creates a [Comparator](Interface.Comparator.md) for comparing strings using locale-aware
-ordering, backed by `Intl.Collator`.
+ordering. The result is equivalent to `String.prototype.localeCompare`
+called with the same `locales` and `options`.
 
 The order depends on the locale and on the runtime's locale data, and
 collation is slower than [stringComparator](Variable.stringComparator.md). Use it for text a person
 reads, and [stringComparator](Variable.stringComparator.md) where the order must be the same
 everywhere.
+
+Without arguments, the same shared comparator is returned on every call.
+With arguments, a new comparator backed by an `Intl.Collator` is created.
 
 ## Parameters
 
@@ -31,7 +35,7 @@ everywhere.
 
 [`Comparator`](Interface.Comparator.md)\<`string`\>
 
-A [Comparator](Interface.Comparator.md) that compares strings with the collator.
+A [Comparator](Interface.Comparator.md) that compares strings by locale.
 
 ## Example
 

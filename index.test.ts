@@ -269,6 +269,12 @@ describe("localeComparator", () => {
   it("should be a comparator", () => {
     assert.deepEqual(["a", "b"].toSorted(localeComparator("en").reversed()), ["b", "a"]);
   });
+
+  it("should share one comparator for the default locale", () => {
+    assert.strictEqual(localeComparator(), localeComparator());
+    assert.notStrictEqual(localeComparator("en"), localeComparator("en"));
+    assert.deepEqual(["b", "A", "a", "B"].toSorted(localeComparator()), ["a", "A", "b", "B"]);
+  });
 });
 
 describe("numberComparator", () => {
@@ -389,6 +395,7 @@ describe("total order laws", () => {
   });
 
   it("hold for localeComparator", () => {
+    assertTotalOrder(fc.string(), localeComparator());
     assertTotalOrder(fc.string(), localeComparator("en"));
   });
 

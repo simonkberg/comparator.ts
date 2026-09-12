@@ -70,7 +70,7 @@ Every argument that takes a compare function accepts a plain `(a, b) => number` 
 Every built-in comparator, and everything derived from one, is a total order on its type: sorting gives the same result on every runtime and regardless of the input's starting order. Compare functions you write yourself must be consistent too; the library cannot repair one that is not.
 
 - **Numbers and bigints** compare numerically. `-0` equals `0`. `NaN` equals `NaN` and sorts after every other number, including `Infinity`.
-- **Strings** compare by UTF-16 code unit with `stringComparator`, the order of `<` on strings, so uppercase sorts before lowercase and the result never depends on the locale. Use `localeComparator(locales, options)` for text a person reads; it is backed by `Intl.Collator`, takes the same arguments, and is slower.
+- **Strings** compare by UTF-16 code unit with `stringComparator`, the order of `<` on strings, so uppercase sorts before lowercase and the result never depends on the locale. Use `localeComparator(locales, options)` for text a person reads; it is equivalent to `localeCompare` with the same arguments and is slower. Called without arguments it returns one shared comparator.
 - **Booleans** sort `false` before `true`.
 - **Dates** compare by time value. Invalid dates equal each other and sort after every valid date.
 - **Ties.** A result of `0`, `-0`, or `NaN` counts as a tie and hands off to the next comparator in `thenWith` and `thenBy`.

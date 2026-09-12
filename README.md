@@ -58,7 +58,7 @@ Wherever a compare function is expected, a plain `(a, b) => number` works too.
 
 ## Ordering
 
-All built-in comparators are total orders: sorting gives the same result on every runtime, regardless of input order.
+All built-in comparators are total orders: sorting gives the same result regardless of input order. All except `localeComparator` also give the same result on every runtime.
 
 - Numbers and bigints compare numerically. `-0` equals `0`. `NaN` equals `NaN` and sorts last.
 - `stringComparator` compares by UTF-16 code unit, so uppercase sorts before lowercase. `localeComparator(locales?, options?)` behaves like `localeCompare` with the same arguments; use it for text people read.

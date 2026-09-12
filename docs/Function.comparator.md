@@ -10,32 +10,34 @@
 function comparator<T>(compareFn): Comparator<T>;
 ```
 
-Defined in: [index.ts:66](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L66)
+Defined in: [index.ts:298](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L298)
 
-Creates a [Comparator](Interface.Comparator.md) from a custom comparison function.
+Creates a [Comparator](Interface.Comparator.md) from a compare function.
+
+The compare function is wrapped, never modified. If `compareFn` is already
+a [Comparator](Interface.Comparator.md), it is returned as is.
 
 ## Type Parameters
 
-| Type Parameter | Description                         |
-| -------------- | ----------------------------------- |
-| `T`            | The type of objects to be compared. |
+| Type Parameter | Description                        |
+| -------------- | ---------------------------------- |
+| `T`            | The type of values to be compared. |
 
 ## Parameters
 
-| Parameter   | Type                                         | Description                                                                                                                                                                                          |
-| ----------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `compareFn` | [`CompareFn`](TypeAlias.CompareFn.md)\<`T`\> | A function that compares two objects of type `T`. Should return a negative number if the first object is less than the second, zero if they are equal, or a positive number if the first is greater. |
+| Parameter   | Type                                         | Description                                      |
+| ----------- | -------------------------------------------- | ------------------------------------------------ |
+| `compareFn` | [`CompareFn`](TypeAlias.CompareFn.md)\<`T`\> | A function that compares two values of type `T`. |
 
 ## Returns
 
 [`Comparator`](Interface.Comparator.md)\<`T`\>
 
-A [Comparator](Interface.Comparator.md) that uses the provided comparison function.
+A [Comparator](Interface.Comparator.md) that uses the provided compare function.
 
 ## Example
 
 ```ts
-const lengthComparator = comparator<string>((a, b) => a.length - b.length);
-const result = lengthComparator("apple", "banana");
-console.log(result); // Outputs a negative number because "apple" is shorter than "banana".
+const byLength = comparator<string>((a, b) => a.length - b.length);
+console.log(["ccc", "a", "bb"].toSorted(byLength)); // ["a", "bb", "ccc"]
 ```

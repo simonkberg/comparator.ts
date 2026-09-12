@@ -30,7 +30,8 @@ A TypeScript library for comparing values.
 
 ## Functions
 
-| Function                             | Description                                                                                                                                                  |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [comparator](Function.comparator.md) | Creates a [Comparator](Interface.Comparator.md) from a compare function.                                                                                     |
-| [comparing](Function.comparing.md)   | Creates a [Comparator](Interface.Comparator.md) that compares values of type `T` by mapping them to values of type `U` and comparing those with `compareFn`. |
+| Function                                         | Description                                                                                                                                                  |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [comparator](Function.comparator.md)             | Creates a [Comparator](Interface.Comparator.md) from a compare function.                                                                                     |
+| [comparing](Function.comparing.md)               | Creates a [Comparator](Interface.Comparator.md) that compares values of type `T` by mapping them to values of type `U` and comparing those with `compareFn`. |
+| [localeComparator](Function.localeComparator.md) | Creates a [Comparator](Interface.Comparator.md) for comparing strings using locale-aware ordering, backed by `Intl.Collator`.                                |

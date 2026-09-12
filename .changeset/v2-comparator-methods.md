@@ -2,7 +2,7 @@
 "comparator.ts": major
 ---
 
-Rework the `Comparator` API around methods and make every built-in comparator a total order.
+Combinators are now methods on the comparator, and every built-in comparator now sorts deterministically, including `NaN`, invalid dates, and strings across locales.
 
 - Rename `thenComparing` to `thenWith`. It now accepts any compare function, not only a `Comparator`.
 - Add `thenBy(mapper, compareFn)` for breaking ties by a key without a nested `comparing` call.

@@ -10,32 +10,34 @@
 function comparing<T, U>(mapper, compareFn): Comparator<T>;
 ```
 
-Defined in: [index.ts:122](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L122)
+Defined in: [index.ts:232](https://github.com/simonkberg/comparator.ts/blob/main/index.ts#L232)
 
-Creates a [Comparator](Interface.Comparator.md) that compares objects of type `T` by mapping them
-to values of type `U` using a provided mapping function and then comparing
-the mapped values using a given comparison function.
+Creates a [Comparator](Interface.Comparator.md) that compares values of type `T` by mapping them
+to values of type `U` and comparing those with `compareFn`.
+
+TypeScript cannot infer `T` from a later `sort` call, so annotate the
+parameter of `mapper` or the type of the result.
 
 ## Type Parameters
 
-| Type Parameter | Description                                        |
-| -------------- | -------------------------------------------------- |
-| `T`            | The type of objects to be compared.                |
-| `U`            | The type of the mapped values used for comparison. |
+| Type Parameter | Description                        |
+| -------------- | ---------------------------------- |
+| `T`            | The type of values to be compared. |
+| `U`            | The type of the mapped values.     |
 
 ## Parameters
 
-| Parameter   | Type                                         | Description                                                                                                                                                                                               |
-| ----------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `mapper`    | (`object`) => `U`                            | A function that maps an object of type `T` to a value of type `U`.                                                                                                                                        |
-| `compareFn` | [`CompareFn`](TypeAlias.CompareFn.md)\<`U`\> | A function that compares two mapped values of type `U`. Should return a negative number if the first value is less than the second, zero if they are equal, or a positive number if the first is greater. |
+| Parameter   | Type                                         | Description                                                      |
+| ----------- | -------------------------------------------- | ---------------------------------------------------------------- |
+| `mapper`    | (`value`) => `U`                             | A function that maps a value of type `T` to a value of type `U`. |
+| `compareFn` | [`CompareFn`](TypeAlias.CompareFn.md)\<`U`\> | A function that compares two mapped values.                      |
 
 ## Returns
 
 [`Comparator`](Interface.Comparator.md)\<`T`\>
 
-A [Comparator](Interface.Comparator.md) for comparing objects of type `T` based on their
-mapped values.
+A [Comparator](Interface.Comparator.md) for values of type `T` based on `compareFn`
+applied to their mapped values.
 
 ## Example
 
@@ -44,9 +46,7 @@ type Person = { name: string; age: number };
 const people: Person[] = [
   { name: "Alice", age: 30 },
   { name: "Bob", age: 25 },
-  { name: "Charlie", age: 35 },
 ];
-const ageComparator = comparing<Person, number>((person) => person.age, numberComparator);
-const sortedPeople = people.sort(ageComparator);
-console.log(sortedPeople); // Outputs the array sorted by age in ascending order.
+const byAge = comparing((person: Person) => person.age, numberComparator);
+console.log(people.toSorted(byAge)); // Bob, then Alice
 ```

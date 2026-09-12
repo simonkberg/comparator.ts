@@ -20,13 +20,7 @@ pnpm add comparator.ts
 ## Usage
 
 ```ts
-import {
-  type Comparator,
-  booleanComparator,
-  comparing,
-  nullsLast,
-  stringComparator,
-} from "comparator.ts";
+import { booleanComparator, comparing, stringComparator } from "comparator.ts";
 
 type FeatureConfig = {
   enabled?: boolean;
@@ -39,17 +33,14 @@ const data: FeatureConfig[] = [
   { enabled: true, name: "Feature C" },
 ];
 
-const compareByEnabled: Comparator<FeatureConfig> = comparing(
-  (feature) => feature.enabled,
-  nullsLast(booleanComparator.reversed()),
+const compareByEnabled = comparing(
+  (feature: FeatureConfig) => feature.enabled,
+  booleanComparator.reversed().nullishLast(),
 );
 
-const compareByName: Comparator<FeatureConfig> = comparing(
-  (feature) => feature.name,
-  stringComparator,
+const sortedData = data.toSorted(
+  compareByEnabled.thenBy((feature) => feature.name, stringComparator),
 );
-
-const sortedData = data.toSorted(compareByEnabled.thenComparing(compareByName));
 // sortedData = [
 //   { enabled: true, name: "Feature C" },
 //   { enabled: false, name: "Feature A" },

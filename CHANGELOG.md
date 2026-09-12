@@ -1,5 +1,30 @@
 # comparator.ts
 
+## 2.0.0
+
+### Major Changes
+
+- [#396](https://github.com/simonkberg/comparator.ts/pull/396) [`93ccd23`](https://github.com/simonkberg/comparator.ts/commit/93ccd23a0d5cf3f5cc92c4306f1747c36ae2494c) Thanks [@simonkberg](https://github.com/simonkberg)! - Drop support for Node.js 20 (EOL). Minimum supported version is now Node.js 22.
+
+- [#634](https://github.com/simonkberg/comparator.ts/pull/634) [`66a05ba`](https://github.com/simonkberg/comparator.ts/commit/66a05bae5437123cd73eae28f9613101e68cefd3) Thanks [@simonkberg](https://github.com/simonkberg)! - Combinators are now methods on the comparator, and every built-in comparator now sorts deterministically, including `NaN`, invalid dates, and strings across locales.
+  
+  - Rename `thenComparing` to `thenWith`. It now accepts any compare function, not only a `Comparator`.
+  - Add `thenBy(mapper, compareFn)` for breaking ties by a key without a nested `comparing` call.
+  - Replace `nullsFirst(cmp)` and `nullsLast(cmp)` with the `cmp.nullishFirst()` and `cmp.nullishLast()` methods. Wrap a plain function with `comparator(fn)` first.
+  - `numberComparator` and `dateComparator` are now total orders: `NaN` and invalid dates equal each other and sort last, instead of corrupting the sort.
+  - `stringComparator` compares by UTF-16 code unit instead of `localeCompare`, so the order no longer depends on the runtime's locale. A locale-aware comparator follows in a later release.
+  - Add `bigintComparator`.
+  - `comparator(cmp)` returns `cmp` itself when it is already a `Comparator`, and `cmp.reversed().reversed()` is `cmp`.
+  - `Comparator<T>` is now invariant in `T`. Where a `Comparator<Person>` was assigned to a `Comparator<Employee>`, use `comparator<Employee>(personComparator)`; passing it to `sort`, `thenWith`, or `comparing` is unchanged.
+
+### Minor Changes
+
+- [#635](https://github.com/simonkberg/comparator.ts/pull/635) [`e73923a`](https://github.com/simonkberg/comparator.ts/commit/e73923a4ada7cdcd186718e4ffbb7c88832447c0) Thanks [@simonkberg](https://github.com/simonkberg)! - Add `localeComparator(locales?, options?)`, a locale-aware string comparator backed by `Intl.Collator`. It replaces the locale-dependent behavior that `stringComparator` had in v1.
+
+### Patch Changes
+
+- [#635](https://github.com/simonkberg/comparator.ts/pull/635) [`e73923a`](https://github.com/simonkberg/comparator.ts/commit/e73923a4ada7cdcd186718e4ffbb7c88832447c0) Thanks [@simonkberg](https://github.com/simonkberg)! - Declare the package free of side effects so bundlers can drop it when unused.
+
 ## 1.0.4
 
 ### Patch Changes

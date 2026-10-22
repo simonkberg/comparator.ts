@@ -16,9 +16,9 @@ A function that compares two values of type `T`.
 
 ## Type Parameters
 
-| Type Parameter | Description                        |
-| -------------- | ---------------------------------- |
-| `T`            | The type of values to be compared. |
+| Type Parameter                    | Description                        |
+| --------------------------------- | ---------------------------------- |
+| <a id="type-parameter-t"></a> `T` | The type of values to be compared. |
 
 ## Parameters
 
